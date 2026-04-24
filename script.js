@@ -1,9 +1,8 @@
-const formTitle = document.getElementById('form-title');
-const mainBtn = document.getElementById('main-btn');
-const toggleBtn = document.getElementById('toggle-btn');
-const switchText = document.getElementById('switch-text');
-const nameGroup = document.getElementById('name-group');
 const authForm = document.getElementById('auth-form');
+const toggleBtn = document.getElementById('toggle-btn');
+const formTitle = document.getElementById('form-title');
+const submitBtn = document.getElementById('submit-btn');
+const emailGroup = document.getElementById('email-group');
 
 let isLoginMode = false;
 
@@ -12,35 +11,36 @@ toggleBtn.addEventListener('click', () => {
 
     if (isLoginMode) {
         formTitle.innerText = "Se connecter";
-        mainBtn.innerText = "Connexion";
-        switchText.innerText = "Pas encore de compte ?";
-        toggleBtn.innerText = "Créer un compte";
-        nameGroup.style.display = "none"; // On cache le nom pour la connexion
+        submitBtn.innerText = "Connexion";
+        toggleBtn.innerText = "Pas de compte ? Créer un compte";
+        // Masquer l'email pour la connexion selon tes consignes (Nom + Password)
+        emailGroup.style.display = "none";
+        document.getElementById('email').required = false;
     } else {
         formTitle.innerText = "Créer un compte";
-        mainBtn.innerText = "Créer mon compte";
-        switchText.innerText = "Déjà membre ?";
-        toggleBtn.innerText = "Se connecter";
-        nameGroup.style.display = "block";
+        submitBtn.innerText = "Créer le compte";
+        toggleBtn.innerText = "Déjà un compte ? Se connecter";
+        emailGroup.style.display = "block";
+        document.getElementById('email').required = true;
     }
 });
 
-// Logique prête à être attachée à une API (comme Supabase)
 authForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const data = {
-        email: document.getElementById('email').value,
+    const formData = {
+        name: document.getElementById('username').value,
         password: document.getElementById('password').value,
-        name: isLoginMode ? null : document.getElementById('name').value
+        email: !isLoginMode ? document.getElementById('email').value : null
     };
 
     if (isLoginMode) {
-        console.log("Tentative de connexion avec :", data.email);
-        alert("Appel de la fonction de connexion pour : " + data.email);
+        console.log("Tentative de connexion pour :", formData.name);
+        // Ici, tu pourras attacher ta logique de vérification base de données
+        alert("Connexion en cours pour " + formData.name);
     } else {
-        console.log("Création de compte pour :", data.name);
-        alert("Appel de la fonction de création pour : " + data.name);
+        console.log("Création de compte pour :", formData.name);
+        // Ici, tu pourras attacher ta logique d'insertion Supabase
+        alert("Compte Scholarite créé pour " + formData.name);
     }
 });
-
