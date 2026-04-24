@@ -3,42 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarite - Se Connecter</title>
+    <title>Scholarite - Se connecter</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <div class="background-container">
-        <div class="glass-card">
-            <h2>Scholarite</h2>
-            <p class="subtitle">Accédez à votre portail scolaire</p>
-            
-            <form id="auth-form">
-                <div class="input-group">
-                    <label for="name">Nom complet</label>
-                    <input type="text" id="name" placeholder="Ex: Jean Mukendi" required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="email">Adresse Email</label>
-                    <input type="email" id="email" placeholder="votre@email.com" required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" placeholder="••••••••" required>
-                </div>
 
-                <div class="button-container">
-                    <button type="submit" id="login-btn" class="btn-primary">Se connecter</button>
-                    <button type="button" id="signup-btn" class="btn-secondary">Créer un compte</button>
-                </div>
-            </form>
-            <p id="message" class="error-message"></p>
-        </div>
+    <div class="background-overlay"></div>
+
+    <div class="glass-container">
+        <form id="auth-form" class="glass-form">
+            <h1>Scholarite</h1>
+            <h2>Se connecter</h2>
+            
+            <div class="input-group">
+                <label for="username">Nom complet</label>
+                <input type="text" id="username" placeholder="Ex: Jean Dupont" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Adresse Email</label>
+                <input type="email" id="email" placeholder="email@exemple.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" id="btn-login" class="btn-primary">Se connecter</button>
+                <button type="button" id="btn-signup" class="btn-secondary">Créer un compte</button>
+            </div>
+            
+            <p id="message" class="status-message"></p>
+        </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
+
