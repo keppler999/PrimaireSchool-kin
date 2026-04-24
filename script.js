@@ -51,3 +51,53 @@ document.getElementById('btn-signup').addEventListener('click', async () => {
         messageDisplay.innerText = "Compte créé ! Vérifiez vos emails pour confirmer.";
     }
 });
+
+/* --- GESTION DU MENU LATÉRAL --- */
+const menuItems = document.querySelectorAll('.side-menu li');
+
+menuItems.forEach(item => {
+    item.addEventListener('click', function() {
+        // Retirer la classe active des autres
+        menuItems.forEach(i => i.classList.remove('active'));
+        // Ajouter la classe active à l'élément cliqué
+        this.classList.add('active');
+        
+        console.log("Navigation vers : " + this.innerText);
+        // Ici, on pourra ajouter la logique pour changer le contenu de la fenêtre principale
+    });
+});
+
+/* --- LOGIQUE DU DASHBOARD (SIMULATION TEMPS RÉEL) --- */
+
+// Fonction pour mettre à jour les statistiques
+function updateDashboardStats() {
+    // Exemple : mise à jour aléatoire pour simuler le "temps réel"
+    // Plus tard, ces données viendront de ta base Platinum_ERP_V2
+    const presents = Math.floor(Math.random() * (1300 - 1200) + 1200);
+    const absents = Math.floor(Math.random() * 20);
+
+    const presentElement = document.querySelector('.value-green');
+    const absentElement = document.querySelector('.value-red');
+
+    if(presentElement) presentElement.innerText = presents.toLocaleString();
+    if(absentElement) absentElement.innerText = absents;
+}
+
+// Rafraîchir les données toutes les 30 secondes
+setInterval(updateDashboardStats, 30000);
+
+/* --- GESTION DES COURS EN TEMPS RÉEL --- */
+function updateLiveLessons() {
+    const now = new Date();
+    const timeString = now.getHours() + "h" + now.getMinutes().toString().padStart(2, '0');
+    
+    // On peut imaginer ici une requête qui cherche dans l'horaire
+    // pour mettre à jour la liste des cours affichés dans la carte "Cours & Matières"
+}
+
+// Initialisation au chargement
+window.onload = () => {
+    updateDashboardStats();
+    console.log("Système Scholarite prêt, Verseau à votre service !");
+};
+
