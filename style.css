@@ -15,10 +15,22 @@ body {
     overflow: hidden;
 }
 
-#section-portail, #section-dashboard {
+/* Modifie ton bloc comme ceci */
+#section-portail {
     width: 100%;
     height: 100vh;
+    display: flex; /* Le portail est en flex par défaut */
+    justify-content: center;
+    align-items: center;
 }
+
+#section-dashboard {
+    width: 100%;
+    height: 100vh;
+    display: none; /* ON FORCE LE CACHE ICI AUSSI PAR SÉCURITÉ */
+    justify-content: center;
+    align-items: center;
+ }
 
 
 /* Image d'arrière-plan */
