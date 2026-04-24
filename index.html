@@ -8,10 +8,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <div id="section-portail">
-    <div class="background-overlay"></div>
-    </div> <div id="section-dashboard" style="display: none;"> 
-    <div class="dashboard-wrapper">
+        <div class="glass-container">
+        <form id="auth-form" class="glass-form">
+            <h1>Scholarite</h1>
+            <h2>Se connecter</h2>
+            <div class="button-group">
+                <button type="submit" id="btn-login" class="btn-primary">Se connecter</button>
+                <button type="button" id="btn-signup" class="btn-secondary">Créer un compte</button>
+            </div>
+            <p id="message" class="status-message"></p>
+        </form>
+    </div> 
+
+</div> <script src="app.js"></script>
+</body>
+    
         <div class="bg-dashboard"></div>
 
         <header class="top-bar glass">
@@ -104,32 +115,19 @@
 
     <div class="background-overlay"></div>
 
-    <div class="glass-container">
+        <div class="glass-container">
         <form id="auth-form" class="glass-form">
             <h1>Scholarite</h1>
             <h2>Se connecter</h2>
-            
-            <div class="input-group">
-                <label for="username">Nom complet</label>
-                <input type="text" id="username" placeholder="Ex: kambale masimengo" required>
-            </div>
-
-            <div class="input-group">
-                <label for="email">Adresse Email</label>
-                <input type="email" id="email" placeholder="email@exemples.com" required>
-            </div>
-
-            <div class="input-group">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" placeholder="********" required>
-            </div>
-
             <div class="button-group">
                 <button type="submit" id="btn-login" class="btn-primary">Se connecter</button>
                 <button type="button" id="btn-signup" class="btn-secondary">Créer un compte</button>
             </div>
             <p id="message" class="status-message"></p>
         </form>
-    </div> </div> <script src="app.js"></script>
+    </div> 
+
+</div> <script src="app.js"></script>
 </body>
+    
 </html>
