@@ -1,12 +1,4 @@
-/* Variables de couleurs */
-:root {
-    --pure-white: #ffffff;
-    --deep-black: #1a1a1a;
-    --glass-border: rgba(255, 255, 255, 0.4);
-    --shadow-light: #ffffff;
-    --shadow-dark: #d1d9e6;
-}
-
+/* Style Général */
 body {
     margin: 0;
     padding: 0;
@@ -14,106 +6,109 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--pure-white);
-    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff; /* Fond blanc pur */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
 }
 
-/* Effet Glassmorphism (Fond cristallisé) */
+/* Effet Glass Cristallisé */
 .glass-container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid var(--glass-border);
-    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     padding: 40px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
-/* Effet Neumorphism 3D (La carte palpable) */
+/* Carte Formulaire 3D Palpable */
 .form-card {
-    background: var(--pure-white);
+    background: #ffffff;
     padding: 30px;
-    border-radius: 30px;
-    box-shadow: 9px 9px 16px var(--shadow-dark), 
-                -9px -9px 16px var(--shadow-light);
+    border-radius: 20px;
     width: 350px;
     text-align: center;
+    /* Illusion d'optique 3D */
+    box-shadow: 
+        20px 20px 60px #d9d9d9,
+        -20px -20px 60px #ffffff,
+        inset 2px 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
 }
 
-h1 {
-    font-family: 'Sacramento', cursive; /* Écriture féminine */
-    color: var(--deep-black);
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+h2 {
+    color: #000000; /* Noir profond */
+    margin-bottom: 5px;
+    font-weight: 800;
 }
 
-.subtitle {
+#form-subtitle {
+    color: #bfa100; /* Or */
     font-size: 0.9rem;
-    color: #888;
     margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
+/* Champs de saisie */
 .input-group {
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 label {
     display: block;
     font-size: 0.8rem;
-    margin-bottom: 8px;
-    margin-left: 10px;
-    color: var(--deep-black);
+    color: #333;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 input {
     width: 100%;
-    padding: 12px 20px;
-    box-sizing: border-box;
+    padding: 12px;
     border: none;
-    border-radius: 15px;
-    background: var(--pure-white);
-    box-shadow: inset 5px 5px 10px var(--shadow-dark), 
-                inset -5px -5px 10px var(--shadow-light);
+    border-radius: 10px;
+    background: #f0f0f0;
+    box-shadow: inset 5px 5px 10px #e6e6e6, inset -5px -5px 10px #ffffff;
+    box-sizing: border-box;
     outline: none;
-    font-family: 'Montserrat', sans-serif;
+    color: #000;
 }
 
-/* Bouton 3D */
-.btn-3d {
+/* Bouton Principal (Or) */
+.btn-main {
     width: 100%;
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 20px;
     border: none;
-    border-radius: 15px;
-    background: var(--pure-white);
-    color: var(--deep-black);
+    border-radius: 12px;
+    background: linear-gradient(145deg, #d4af37, #bfa100);
+    color: white;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 5px 5px 10px var(--shadow-dark), 
-                -5px -5px 10px var(--shadow-light);
+    box-shadow: 5px 5px 15px #d9d9d9, -5px -5px 15px #ffffff;
     transition: all 0.2s ease;
 }
 
-.btn-3d:active {
-    box-shadow: inset 2px 2px 5px var(--shadow-dark), 
-                inset -2px -2px 5px var(--shadow-light);
+.btn-main:active {
+    box-shadow: inset 5px 5px 10px #a38900, inset -5px -5px 10px #ffd700;
     transform: scale(0.98);
 }
 
-.switch-mode {
-    margin-top: 25px;
-    font-size: 0.85rem;
+.divider {
+    margin: 20px 0;
+    color: #888;
+    font-size: 0.8rem;
 }
 
-#toggle-btn {
+/* Bouton Secondaire (Lien) */
+.btn-secondary {
     background: none;
     border: none;
-    color: var(--deep-black);
+    color: #000;
     text-decoration: underline;
-    font-family: 'Sacramento', cursive;
-    font-size: 1.2rem;
     cursor: pointer;
+    font-size: 0.85rem;
 }
-
