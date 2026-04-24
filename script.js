@@ -18,20 +18,18 @@ authForm.addEventListener('submit', async (e) => {
         password: password,
     });
 
-    // ... à l'intérieur de ta fonction de connexion réussie ...
-if (!error) {
-    // 1. Cacher le portail
-    document.getElementById('section-portail').style.display = 'none';
+        // 1. Cacher le portail de force
+    document.getElementById('section-portail').style.setProperty('display', 'none', 'important');
     
-    // 2. Afficher le Dashboard
-    document.getElementById('section-dashboard').style.display = 'block';
+    // 2. Afficher le Dashboard de force en mode Flex
+    document.getElementById('section-dashboard').style.setProperty('display', 'flex', 'important');
     
-    // 3. Optionnel : Supprimer l'image de fond du portail si elle gêne
+    // 3. Nettoyage du fond
     document.body.style.backgroundImage = "none"; 
     
-    console.log("Bienvenue Verseau, transition vers Scholarite terminée !");
-}
-    
+    console.log("Transition forcée réussie vers Scholarite !");
+} // Assure-toi que cette accolade ferme bien ton bloc "else"
+                          
 
     if (error) {
         messageDisplay.style.color = "red";
