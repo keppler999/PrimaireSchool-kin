@@ -8,36 +8,50 @@
 </head>
 <body>
 
-    <div class="glass-container">
-        <div class="form-card" id="auth-card">
-            <h2 id="form-title">Créer un compte</h2>
-            <p id="form-subtitle">Bienvenue sur Scholarite</p>
+    <div class="container">
+        <div id="register-form" class="glass-card">
+            <h1 class="title">Créer un compte</h1>
+            <p class="subtitle">Scholarite - Gestion Primaire</p>
+            
+            <div class="input-group">
+                <label>Nom complet</label>
+                <input type="text" id="reg-name" placeholder="Ex: Jean Dupont">
+            </div>
 
-            <form id="auth-form">
-                <div class="input-group" id="name-group">
-                    <label for="username">Nom complet</label>
-                    <input type="text" id="username" placeholder="Ex: Jean Mukendi" required>
-                </div>
+            <div class="input-group">
+                <label>Adresse Email</label>
+                <input type="email" id="reg-email" placeholder="directeur@ecole.com">
+            </div>
 
-                <div class="input-group" id="email-group">
-                    <label for="email">Adresse Email</label>
-                    <input type="email" id="email" placeholder="nom@exemple.com" required>
-                </div>
+            <div class="input-group">
+                <label>Mot de passe</label>
+                <input type="password" id="reg-password" placeholder="••••••••">
+            </div>
 
-                <div class="input-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" placeholder="••••••••" required>
-                </div>
+            <button class="btn btn-gold" onclick="handleRegister()">Créer le compte</button>
+            <p class="footer-text">Déjà membre ? <span class="link" onclick="toggleForm()">Se connecter</span></p>
+        </div>
 
-                <button type="submit" class="btn-main" id="submit-btn">Créer le compte</button>
-            </form>
+        <div id="login-form" class="glass-card hidden">
+            <h1 class="title">Connexion</h1>
+            <p class="subtitle">Accédez à votre espace</p>
+            
+            <div class="input-group">
+                <label>Nom d'utilisateur</label>
+                <input type="text" id="login-name" placeholder="Votre nom">
+            </div>
 
-            <div class="divider">ou</div>
+            <div class="input-group">
+                <label>Mot de passe</label>
+                <input type="password" id="login-password" placeholder="••••••••">
+            </div>
 
-            <button class="btn-secondary" id="toggle-btn">Déjà un compte ? Se connecter</button>
+            <button class="btn btn-black" onclick="handleLogin()">Se connecter</button>
+            <p class="footer-text">Nouveau ici ? <span class="link" onclick="toggleForm()">Créer un compte</span></p>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
