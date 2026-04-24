@@ -9,45 +9,45 @@
 <body>
 
     <div class="container">
-        <div id="register-form" class="glass-card">
-            <h1 class="title">Créer un compte</h1>
-            <p class="subtitle">Scholarite - Gestion Primaire</p>
+        <div id="register-form" class="form-card">
+            <h2 class="gold-text">Créer un compte</h2>
+            <p class="subtitle">Rejoignez l'écosystème Scholarite</p>
             
             <div class="input-group">
                 <label>Nom complet</label>
-                <input type="text" id="reg-name" placeholder="Ex: Jean Dupont">
+                <input type="text" placeholder="Ex: Jean Mukendi">
             </div>
-
-            <div class="input-group">
-                <label>Adresse Email</label>
-                <input type="email" id="reg-email" placeholder="directeur@ecole.com">
-            </div>
-
-            <div class="input-group">
-                <label>Mot de passe</label>
-                <input type="password" id="reg-password" placeholder="••••••••">
-            </div>
-
-            <button class="btn btn-gold" onclick="handleRegister()">Créer le compte</button>
-            <p class="footer-text">Déjà membre ? <span class="link" onclick="toggleForm()">Se connecter</span></p>
-        </div>
-
-        <div id="login-form" class="glass-card hidden">
-            <h1 class="title">Connexion</h1>
-            <p class="subtitle">Accédez à votre espace</p>
             
             <div class="input-group">
-                <label>Nom d'utilisateur</label>
-                <input type="text" id="login-name" placeholder="Votre nom">
+                <label>Adresse Email</label>
+                <input type="email" placeholder="nom@exemple.com">
             </div>
-
+            
             <div class="input-group">
                 <label>Mot de passe</label>
-                <input type="password" id="login-password" placeholder="••••••••">
+                <input type="password" placeholder="••••••••">
             </div>
+            
+            <button class="btn-main">CRÉER</button>
+            <p class="switch-text">Déjà inscrit ? <span onclick="toggleForm()">Se connecter</span></p>
+        </div>
 
-            <button class="btn btn-black" onclick="handleLogin()">Se connecter</button>
-            <p class="footer-text">Nouveau ici ? <span class="link" onclick="toggleForm()">Créer un compte</span></p>
+        <div id="login-form" class="form-card hidden">
+            <h2 class="gold-text">Se connecter</h2>
+            <p class="subtitle">Bon retour sur Scholarite</p>
+            
+            <div class="input-group">
+                <label>Nom complet</label>
+                <input type="text" placeholder="Entrez votre nom">
+            </div>
+            
+            <div class="input-group">
+                <label>Mot de passe</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+            
+            <button class="btn-main">SE CONNECTER</button>
+            <p class="switch-text">Nouveau ici ? <span onclick="toggleForm()">Créer un compte</span></p>
         </div>
     </div>
 
