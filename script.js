@@ -1,46 +1,39 @@
-const authForm = document.getElementById('auth-form');
-const toggleBtn = document.getElementById('toggle-btn');
-const formTitle = document.getElementById('form-title');
-const submitBtn = document.getElementById('submit-btn');
-const emailGroup = document.getElementById('email-group');
-
-let isLoginMode = false;
-
-toggleBtn.addEventListener('click', () => {
-    isLoginMode = !isLoginMode;
-
-    if (isLoginMode) {
-        formTitle.innerText = "Se connecter";
-        submitBtn.innerText = "Connexion";
-        toggleBtn.innerText = "Pas de compte ? Créer un compte";
-        // Masquer l'email pour la connexion selon tes consignes (Nom + Password)
-        emailGroup.style.display = "none";
-        document.getElementById('email').required = false;
-    } else {
-        formTitle.innerText = "Créer un compte";
-        submitBtn.innerText = "Créer le compte";
-        toggleBtn.innerText = "Déjà un compte ? Se connecter";
-        emailGroup.style.display = "block";
-        document.getElementById('email').required = true;
-    }
-});
-
-authForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+// Basculer entre Création de compte et Connexion
+function toggleForm() {
+    const regForm = document.getElementById('register-form');
+    const loginForm = document.getElementById('login-form');
     
-    const formData = {
-        name: document.getElementById('username').value,
-        password: document.getElementById('password').value,
-        email: !isLoginMode ? document.getElementById('email').value : null
-    };
+    regForm.classList.toggle('hidden');
+    loginForm.classList.toggle('hidden');
+}
 
-    if (isLoginMode) {
-        console.log("Tentative de connexion pour :", formData.name);
-        // Ici, tu pourras attacher ta logique de vérification base de données
-        alert("Connexion en cours pour " + formData.name);
-    } else {
-        console.log("Création de compte pour :", formData.name);
-        // Ici, tu pourras attacher ta logique d'insertion Supabase
-        alert("Compte Scholarite créé pour " + formData.name);
+// Logique pour "Créer"
+function handleRegister() {
+    const name = document.getElementById('reg-name').value;
+    const email = document.getElementById('reg-email').value;
+    const password = document.getElementById('reg-password').value;
+
+    if(!name || !email || !password) {
+        alert("Veuillez remplir tous les champs Scholarite.");
+        return;
     }
-});
+
+    console.log("Tentative de création de compte pour:", name);
+    // Ici, tu pourras injecter ton code Supabase : supabase.auth.signUp(...)
+    alert("Compte Scholarite créé avec succès pour " + name);
+}
+
+// Logique pour "Se connecter"
+function handleLogin() {
+    const name = document.getElementById('login-name').value;
+    const password = document.getElementById('login-password').value;
+
+    if(!name || !password) {
+        alert("Veuillez entrer vos identifiants.");
+        return;
+    }
+
+    console.log("Connexion de :", name);
+    // Ici, tu pourras injecter ton code Supabase : supabase.auth.signInWithPassword(...)
+    alert("Bienvenue sur Scholarite, " + name);
+}
