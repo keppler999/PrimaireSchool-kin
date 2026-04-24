@@ -18,6 +18,21 @@ authForm.addEventListener('submit', async (e) => {
         password: password,
     });
 
+    // ... à l'intérieur de ta fonction de connexion réussie ...
+if (!error) {
+    // 1. Cacher le portail
+    document.getElementById('section-portail').style.display = 'none';
+    
+    // 2. Afficher le Dashboard
+    document.getElementById('section-dashboard').style.display = 'block';
+    
+    // 3. Optionnel : Supprimer l'image de fond du portail si elle gêne
+    document.body.style.backgroundImage = "none"; 
+    
+    console.log("Bienvenue Verseau, transition vers Scholarite terminée !");
+}
+    
+
     if (error) {
         messageDisplay.style.color = "red";
         messageDisplay.innerText = "Erreur : Ce compte n'existe pas ou les identifiants sont incorrects.";
