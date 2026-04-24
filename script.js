@@ -1,94 +1,42 @@
-// ============================================================
-// 1. CONFIGURATION SUPABASE (Base : Platinum_ERP_V2)
-// ============================================================
-const SUPABASE_URL = "https://dztbxntfsouuyrrigaah.supabase.co";
-const SUPABASE_KEY = "sb_publishable_lNctOhdEyESJGitYGXDsqA_rNLhHNBe"; 
+// Remplace par tes clés si besoin (déjà fournies dans ton message)
+const SUPABASE_URL = 'https://dztbxntfsouuyrrigaah.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_lNctOhdEyESJGitYGXDsqA_rNLhHNBe';
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ============================================================
-// 2. LOGIQUE DE BASCULEMENT (NAVIGATION)
-// ============================================================
-// Cette fonction gère l'illusion d'optique en cachant/affichant les formulaires
-function toggleForm() {
-    const registerForm = document.getElementById('register-form');
-    const loginForm = document.getElementById('login-form');
+const loginForm = document.getElementById('loginForm');
+const messageDisplay = document.getElementById('message');
 
-    if (registerForm && loginForm) {
-        registerForm.classList.toggle('hidden');
-        loginForm.classList.toggle('hidden');
-    } else {
-        console.error("Verseau : Erreur d'ID. Vérifie que tes div s'appellent 'register-form' et 'login-form'");
-    }
-}
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const name = document.getElementById('name').value;
 
-// ============================================================
-// 3. FONCTION : CRÉER UN COMPTE (INSCRIPTION)
-// ============================================================
-async function signUp() {
-    const name = document.querySelector('#register-form input[type="text"]').value;
-    const email = document.querySelector('#register-form input[type="email"]').value;
-    const password = document.querySelector('#register-form input[type="password"]').value;
+    messageDisplay.textContent = "Vérification...";
 
-    if (!email || !password) return alert("Veuillez remplir tous les champs.");
-
-    // Création du compte dans Supabase Auth
-    const { data, error } = await supabase.auth.signUp({
+    // 1. Tentative de connexion
+    const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
-        options: {
-            data: { display_name: name } // Enregistre le nom dans les métadonnées
+    });
+
+    if (error) {
+        // 2. Si erreur, vérifier si le compte existe du tout
+        if (error.message.includes("Invalid login credentials")) {
+            messageDisplay.textContent = "Vous n'avez pas de compte. Veuillez en créer un.";
+        } else {
+            messageDisplay.textContent = "Erreur : " + error.message;
         }
-    });
-
-    if (error) {
-        alert("Erreur d'inscription : " + error.message);
     } else {
-        alert("Succès ! Un email de confirmation a été envoyé.");
-        console.log("Utilisateur créé :", data);
+        messageDisplay.style.color = "green";
+        messageDisplay.textContent = `Bienvenue ${name}, connexion réussie !`;
+        // Redirection vers le tableau de bord de Scholarite ici
     }
-}
-
-// ============================================================
-// 4. FONCTION : SE CONNECTER (CONNEXION)
-// ============================================================
-async function signIn() {
-    // On cible spécifiquement les champs du formulaire de connexion
-    const emailField = document.querySelector('#login-form input[type="email"]');
-    const passwordField = document.querySelector('#login-form input[type="password"]');
-
-    if (!emailField || !emailField.value) {
-        return alert("Veuillez entrer votre adresse email.");
-    }
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email: emailField.value,
-        password: passwordField.value,
-    });
-
-    if (error) {
-        alert("Erreur de connexion : " + error.message);
-    } else {
-        alert("Bienvenue sur Scholarite !");
-        // Redirection vers ton tableau de bord
-        window.location.href = "dashboard.html"; 
-    }
-}
-
-// ============================================================
-// 5. INITIALISATION ET ÉCOUTEURS (EVENT LISTENERS)
-// ============================================================
-// On attend que la page soit totalement chargée avant d'écouter les clics
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // Bouton CRÉER
-    const btnSignUp = document.querySelector('#register-form .btn-main');
-    if(btnSignUp) btnSignUp.addEventListener('click', signUp);
-
-    // Bouton SE CONNECTER
-    const btnSignIn = document.querySelector('#login-form .btn-main');
-    if(btnSignIn) btnSignIn.addEventListener('click', signIn);
-    
-    // Note : Pour le basculement (toggleForm), 
-    // assure-toi que ton HTML contient bien : onclick="toggleForm()"
 });
-  
+
+// Bouton Créer un compte
+document.getElementById('btnRegister').addEventListener('click', () => {
+    alert("Redirection vers la page d'inscription...");
+    // window.location.href = "inscription.html";
+});
