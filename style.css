@@ -142,3 +142,145 @@ input:focus {
     font-weight: bold;
 }
 
+/* Arrière-plan dynamique */
+.bg-dashboard {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: url('https://images.unsplash.com/photo-1523050853064-db79463283d7?q=80&w=2070') center/cover;
+    z-index: -2;
+    filter: brightness(0.6);
+}
+
+.dashboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    color: #000;
+}
+
+/* Verre Pur */
+.glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.top-bar {
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 30px;
+    margin: 10px;
+    border-radius: 15px;
+}
+
+.school-identity {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.school-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #D4AF37; /* Or */
+}
+
+.school-name {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Menu Latéral */
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    padding: 10px;
+    gap: 15px;
+}
+
+.side-menu {
+    width: 280px;
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.side-menu ul {
+    list-style: none;
+}
+
+.side-menu li {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.side-menu li img {
+    width: 24px;
+    margin-right: 15px;
+}
+
+.side-menu li:hover, .side-menu li.active {
+    background: rgba(212, 175, 55, 0.3); /* Teinte Or */
+    transform: translateX(5px);
+}
+
+/* Grille du Dashboard */
+.dashboard-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 20px;
+    min-height: 180px;
+}
+
+.card h3 {
+    border-bottom: 2px solid #D4AF37;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+/* Éléments internes des cartes */
+.stat-row { margin: 10px 0; font-size: 1.2rem; }
+.value-green { color: #006400; font-weight: bold; }
+.value-red { color: #8B0000; font-weight: bold; }
+
+.scroll-box {
+    max-height: 100px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+}
+
+.dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+.dot.active { background-color: #2ecc71; }
+.dot.inactive { background-color: #e74c3c; }
+
+.bar { background: rgba(0,0,0,0.1); border-radius: 5px; height: 10px; margin-top: 5px; }
+.fill { background: #D4AF37; height: 100%; border-radius: 5px; }
+
+
