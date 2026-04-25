@@ -28,7 +28,6 @@ authForm.addEventListener('submit', async (e) => {
         
         // Redirection vers le tableau de bord après 1.5 seconde
         setTimeout(() => {
-            alert("Je vais changer de page maintenant");
 window.location.replace = "dashboard.html";
         }, 1500);
     }
