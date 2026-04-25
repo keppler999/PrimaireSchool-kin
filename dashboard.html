@@ -43,66 +43,30 @@
     </nav>
 
     <main class="dashboard-grid">
-        
-        <div class="card-3d">
-            <h3>Casier Élève</h3>
-            <div class="ticker-container">
-                <div class="ticker-item">Présents : <span class="txt-green">245</span></div>
-                <div class="ticker-item">Absents : <span class="txt-red">12</span></div>
+    <div class="card-glass">
+        <h3><i class="fas fa-user-graduate"></i> Casier Élève</h3>
+        <div class="ticker-box">
+            <div class="ticker-content">
+                <div class="ticker-line">Présents: <span class="green-val">245</span></div>
+                <div class="ticker-line">Absents: <span class="red-val">12</span></div>
+                <div class="ticker-line">Retards: <span style="color: #ffcc00;">05</span></div>
             </div>
         </div>
+    </div>
 
-        <div class="card-3d">
-            <h3>Gestion du Personnel</h3>
-            <div class="ticker-container slow">
-                <div class="ticker-item">Profs: <span class="txt-green">P:18</span> / <span class="txt-red">A:2</span></div>
-                <div class="ticker-item">Admin: <span class="txt-green">P:5</span> / <span class="txt-red">A:0</span></div>
-                <div class="ticker-item">Staff: <span class="txt-green">P:10</span> / <span class="txt-red">A:1</span></div>
+    <div class="card-glass">
+        <h3><i class="fas fa-users-cog"></i> Personnel</h3>
+        <div class="ticker-box">
+            <div class="ticker-content">
+                <div class="ticker-line">Profs: <span class="green-val">18/20</span></div>
+                <div class="ticker-line">Admin: <span class="green-val">05/05</span></div>
+                <div class="ticker-line">Staff: <span class="red-val">09/10</span></div>
             </div>
         </div>
-
-        <div class="card-3d">
-            <h3>Organisation Académique</h3>
-            <p class="static-subtitle">Titulaire : Mr. Kambale</p>
-            <div class="ticker-container">
-                <div class="ticker-item">6ème A : 15 G / 12 F</div>
-                <div class="ticker-item">5ème B : 10 G / 18 F</div>
-            </div>
-        </div>
-
-        <div class="card-3d">
-            <h3>Cours en Direct</h3>
-            <div class="ticker-container">
-                <div class="ticker-item">6ème A : Mathématiques</div>
-                <div class="ticker-item">3ème Élec : Électronique</div>
-            </div>
-        </div>
-
-        <div class="card-3d">
-            <h3>Statut Enseignants</h3>
-            <div class="ticker-container">
-                <div class="ticker-item">M. Jean : <span class="status-dot green"></span> Actif</div>
-                <div class="ticker-item">Mme. Marie : <span class="status-dot red"></span> Inactif</div>
-            </div>
-        </div>
-
-        <div class="card-3d collapsible" onclick="this.classList.toggle('open')">
-            <h3>Notes & Évaluations (Cliquez)</h3>
-            <div class="table-content">
-                <table>
-                    <thead>
-                        <tr><th>Classe</th><th>Titulaire</th><th>Moyenne</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>1ère P</td><td>M. Paul</td><td>14.5</td></tr>
-                        <tr><td>2ème P</td><td>Mme Alice</td><td>13.2</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
+    </div>
+    
     </main>
-
+    
     <script src="dashboard-app.js"></script>
 </body>
 </html>
