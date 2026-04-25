@@ -1,100 +1,173 @@
 :root {
     --gold: #D4AF37;
-    --green: #2ecc71;
-    --red: #e74c3c;
-    --yellow: #f1c40f;
-    --glass-bg: rgba(20, 20, 20, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass: rgba(255, 255, 255, 0.15);
+    --border: rgba(255, 255, 255, 0.3);
+    --black: #0a0a0a;
 }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    margin: 0; padding: 0;
+    background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+    height: 100vh;
+    display: flex;
     font-family: 'Segoe UI', sans-serif;
-    background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1920') center/cover;
-    height: 100vh; overflow: hidden;
+    overflow: hidden;
 }
 
-.glass-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    backdrop-filter: blur(15px); background: rgba(0,0,0,0.4); z-index: 1;
+/* L'effet Verre Total */
+.full-screen-blur {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    z-index: 1;
 }
 
-.app-wrapper {
-    position: relative; z-index: 2; display: flex; height: 100vh;
+/* Sidebar Stickers Noirs */
+.sidebar-stickers {
+    width: 100px;
+    background: var(--black);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    border-right: 1px solid var(--gold);
 }
 
-/* SIDEBAR STICKERS NOIRS */
-.sidebar-noir {
-    width: 90px; background: rgba(0,0,0,0.6); display: flex; flex-direction: column;
-    align-items: center; padding: 20px 0; border-right: 1px solid var(--glass-border);
+.sticker {
+    width: 60px; height: 60px;
+    background: #1a1a1a;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; align-items: center;
+    color: var(--gold);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.nav-stickers { margin-top: 30px; }
-.sticker-item {
-    width: 50px; height: 50px; background: #000; color: var(--gold);
-    border-radius: 12px; display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px; border: 1px solid #333; cursor: pointer; transition: 0.3s;
+.sticker.active, .sticker:hover {
+    background: var(--gold);
+    color: var(--black);
+    box-shadow: 0 0 20px var(--gold);
 }
-.sticker-item.active, .sticker-item:hover { border-color: var(--gold); box-shadow: 0 0 10px var(--gold); }
 
-/* CONTENT AREA */
-.content-area { flex: 1; display: flex; flex-direction: column; padding: 30px; position: relative; }
+/* Main Content */
+.dashboard-core {
+    flex: 1;
+    z-index: 5;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
 
-/* HEADER & CHART */
-.main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.brand-section h1 { color: var(--gold); font-size: 2.8rem; margin: 0; letter-spacing: 4px; }
-.live-indicator { color: var(--green); font-size: 0.8rem; display: flex; align-items: center; }
-.dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; margin-right: 8px; animation: pulse 1.5s infinite; }
+/* Header */
+.glass-header {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
 
-.chart-container { width: 400px; height: 100px; background: rgba(255,255,255,0.05); border-radius: 15px; }
+.glass-header h1 {
+    color: var(--gold);
+    font-size: 2.5rem;
+    letter-spacing: 6px;
+}
 
-/* CARDS GRID */
-.grid-container {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; overflow-y: auto; padding-bottom: 80px;
+.chart-container { width: 350px; height: 100px; }
+
+/* Grid & Cards */
+.ultra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
 }
 
 .glass-card {
-    background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px;
-    padding: 20px; height: 180px; position: relative; color: white;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 25px;
+    height: 200px;
+    position: relative;
+    color: #000; /* Texte Noir profond sur verre */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    overflow: hidden;
 }
 
-.pin {
-    position: absolute; top: 15px; right: 15px; width: 8px; height: 8px;
-    background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px var(--gold);
+.gold-pin {
+    position: absolute;
+    top: 15px; right: 15px;
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--gold);
 }
 
-.glass-card h3 { color: var(--gold); font-size: 0.85rem; text-transform: uppercase; margin-top: 0; }
-
-/* STEP ANIMATION (Mouvement Pas à Pas) */
-.step-wrapper { height: 100px; overflow: hidden; position: relative; }
-.step-scroll { animation: stepMove 12s steps(6) infinite; } /* Ajuster steps selon données */
-
-@keyframes stepMove {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-600px); } /* 6 items * 100px */
+.glass-card h3 {
+    color: var(--gold);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
 }
 
-.step-box {
-    height: 100px; display: flex; flex-direction: column; justify-content: center;
-    font-size: 0.95rem; border-top: 1px solid rgba(255,255,255,0.05);
+/* Animation PAS À PAS (Le Ticker) */
+.step-window {
+    height: 100px;
+    overflow: hidden;
 }
 
-/* FOOTER PROFILE */
-.user-footer { position: absolute; bottom: 30px; right: 30px; }
-.profile-pill {
-    background: #000; border: 1px solid var(--gold); border-radius: 50px;
-    padding: 8px 10px 8px 25px; display: flex; align-items: center; color: white;
-}
-.p-text { margin-right: 15px; text-align: right; }
-.p-sticker {
-    width: 45px; height: 45px; background: var(--gold); border-radius: 50%;
-    color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+.step-track {
+    display: flex;
+    flex-direction: column;
+    animation: stepScrolling 24s steps(12) infinite;
 }
 
-/* HELPERS */
-.txt-green { color: var(--green); }
-.txt-red { color: var(--red); }
-.txt-gold { color: var(--gold); }
-.txt-yellow { color: var(--yellow); }
+@keyframes stepScrolling {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1200px); } /* 100px par saut */
+}
 
-@keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+.step-item {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 800;
+}
+
+/* Profil & Stickers */
+.profile-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.black-sticker-circle {
+    width: 60px; height: 60px;
+    background: var(--black);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center; align-items: center;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+}
+
+/* Couleurs Stats */
+.txt-green { color: #008000; }
+.txt-red { color: #b30000; }
+.txt-yellow { color: #cca300; }
+.txt-gold { color: #8a6d00; }
