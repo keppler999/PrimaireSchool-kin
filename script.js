@@ -22,14 +22,15 @@ authForm.addEventListener('submit', async (e) => {
         messageDisplay.style.color = "red";
         messageDisplay.innerText = "Erreur : Ce compte n'existe pas ou les identifiants sont incorrects.";
     } else {
-        // C'EST CETTE PARTIE QUE TU REMPLACES
-        messageDisplay.style.color = "#2ECC71"; // Un joli vert pour rester dans ton thème
-        messageDisplay.innerText = "Connexion réussie ! Préparation de votre espace...";
+        // On affiche le message de succès d'abord
+messageDisplay.style.color = "#00FF00"; // Ton vert pro
+messageDisplay.innerText = "Connexion réussie !";
+
+// On attend 1.5 seconde avant de changer de page
+setTimeout(() => {
+    window.location.replace("dashboard.html"); 
+}, 1500);
         
-        // Redirection vers le tableau de bord après 1.5 seconde
-        setTimeout(() => {
-window.location.replace = "dashboard.html";
-        }, 1500);
     }
 });
 
