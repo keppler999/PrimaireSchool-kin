@@ -1,6 +1,6 @@
 // Configuration Supabase
-const supabaseUrl = 'https://dztbxntfsouuyrrigaah.supabase.co';
-const supabaseKey = 'sb_publishable_lNctOhdEyESJGitYGXDsqA_rNLhHNBe'; // Utilisation de ta clé publique
+const supabaseUrl = 'https://wkyqesqmfthcpemqpjvo.supabase.co';
+const supabaseKey = 'sb_publishable_EW4WRdcYH_6y8rlen9Pn2A_e8_cKveu'; // Utilisation de ta clé publique
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 const authForm = document.getElementById('auth-form');
