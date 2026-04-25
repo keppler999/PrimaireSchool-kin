@@ -1,79 +1,137 @@
-/* Import du style de base de ton portail pour la cohérence */
 :root {
     --gold: #D4AF37;
-    --glass: rgba(255, 255, 255, 0.2);
-    --pure-white: #ffffff;
-    --shadow-3d: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
+    --glass-pure: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --dark-bg: #121212;
+    --gray-icon: #2c2c2c; /* Ton image grise pour les stickers */
 }
 
 body {
     margin: 0;
-/* INSÈRE CECI À LA PLACE : */
-:root {
-    --gold: #D4AF37;
-    --glass-bg: rgba(255, 255, 255, 0.75); 
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --text-dark: #1a1a1a;
-    --accent-glow: rgba(212, 175, 55, 0.2);
+    font-family: 'Poppins', sans-serif;
+    background: #000;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
 }
 
-.card-3d {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+/* Arrière-plan scolaire flou */
+.background-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1920') center/cover;
+    filter: blur(8px) brightness(0.6);
+    z-index: -1;
+}
+
+/* Sidebar avec Menu qui se déroule au CLIC */
+.sidebar-glass {
+    width: 85px;
+    height: 90vh;
+    margin: auto 15px;
+    background: var(--glass-pure);
+    backdrop-filter: blur(20px);
+    border-radius: 40px; /* Barres bien arrondies */
     border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    min-height: 200px;
-    position: relative;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
+    z-index: 1000;
 }
 
-.card-3d:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 45px var(--accent-glow);
-    border: 1px solid var(--gold);
+.sidebar-glass.open { width: 300px; }
+
+.nav-links { list-style: none; padding: 20px 10px; margin: 0; }
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 8px;
+    color: white;
+    cursor: pointer;
+    border-radius: 30px; /* Arrondi interne */
+    transition: 0.3s;
 }
 
-.card-3d h3 { 
-    color: var(--text-dark); 
+.nav-links li:hover { background: rgba(255,255,255,0.1); }
+
+.icon-frame {
+    min-width: 50px; height: 50px;
+    background: var(--gray-icon); /* Stickers fond gris */
+    border-radius: 50%; /* Cercle parfait */
+    display: flex;
+    justify-content: center; align-items: center;
+    margin-right: 15px;
+    color: var(--gold);
+    font-size: 1.2rem;
+}
+
+/* Fenêtres "Épinglées" (Pinned Cards) */
+.dashboard-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 100px 30px 30px 30px;
+    overflow-y: auto;
+}
+
+.card-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 25px;
+    padding: 20px;
+    position: relative;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* L'épingle décorative */
+.card-glass::before {
+    content: '';
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--gold);
+}
+
+.card-glass h3 {
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    font-size: 0.9rem;
-    margin-bottom: 25px;
-    border-bottom: 2px solid var(--gold);
-    display: inline-block;
-    padding-bottom: 5px;
+    color: var(--gold);
+    margin: 0 0 15px 0;
+    letter-spacing: 2px;
 }
-    
-/* Animation Défilement Vertical */
-.ticker-container {
-    height: 50px;
+
+/* ANIMATION DES DONNÉES (Le Ticker vivant) */
+.ticker-box {
+    height: 60px;
     overflow: hidden;
-    position: relative;
 }
 
-.ticker-item {
-    height: 50px;
-    line-height: 50px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    animation: scrollUp 4s infinite ease-in-out;
+.ticker-content {
+    animation: slideUp 6s infinite ease-in-out;
 }
 
-@keyframes scrollUp {
-    0%, 20% { transform: translateY(0); }
-    50%, 70% { transform: translateY(-50px); }
+.ticker-line {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+@keyframes slideUp {
+    0%, 25% { transform: translateY(0); }
+    33%, 58% { transform: translateY(-60px); }
+    66%, 91% { transform: translateY(-120px); }
     100% { transform: translateY(0); }
 }
 
-.txt-green { color: #2ecc71; }
-.txt-red { color: #e74c3c; }
-
-/* Tableaux cachés */
-.table-content { display: none; padding-top: 15px; }
-.collapsible.open .table-content { display: block; }
-  
+.green-val { color: #00ff88; text-shadow: 0 0 10px rgba(0,255,136,0.3); }
+.red-val { color: #ff4d4d; text-shadow: 0 0 10px rgba(255,77,77,0.3); }
