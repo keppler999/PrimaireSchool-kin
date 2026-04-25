@@ -28,19 +28,27 @@ authForm.addEventListener('submit', async (e) => {
     }
 });
 
-// Fonction pour la Création de compte (Redirection ou Logique)
+// Fonction pour la Création de compte
 document.getElementById('btn-signup').addEventListener('click', async () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const fullName = document.getElementById('username').value; // On récupère le nom
 
-    if(!email || !password) {
-        messageDisplay.innerText = "Veuillez remplir les champs pour créer un compte.";
+    if(!email || !password || !fullName) {
+        messageDisplay.style.color = "orange";
+        messageDisplay.innerText = "Veuillez remplir tous les champs (Nom, Email et MDP).";
         return;
     }
 
+    // C'est ici que le changement opère :
     const { data, error } = await _supabase.auth.signUp({
         email: email,
         password: password,
+        options: {
+            data: {
+                full_name: fullName // On enregistre le nom dans Supabase
+            }
+        }
     });
 
     if (error) {
@@ -51,4 +59,3 @@ document.getElementById('btn-signup').addEventListener('click', async () => {
         messageDisplay.innerText = "Compte créé ! Vérifiez vos emails pour confirmer.";
     }
 });
-        
