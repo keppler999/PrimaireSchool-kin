@@ -8,106 +8,47 @@
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #f0f2f5;
-    display: flex;
-}
-
-.background-overlay {
-    position: fixed;
-    width: 100%; height: 100%;
-    background: url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=1920') center/cover;
-    z-index: -1;
-    filter: brightness(0.7);
-}
-
-/* Header */
-.main-header {
-    position: fixed;
-    top: 20px; right: 20px;
-    z-index: 100;
-}
-
-.school-identity {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 10px;
-    border-radius: 50px;
-    box-shadow: var(--shadow-3d);
-}
-
-.logo-upload img {
-    width: 45px; height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid var(--gold);
-}
-
-.school-name-input {
-    border: none; outline: none;
-    padding: 5px 15px; font-weight: bold;
-}
-
-/* Sidebar Verre Pur */
-.sidebar-glass {
-    width: 80px;
-    height: 95vh;
-    margin: 2.5vh 0 0 15px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(25px);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: width 0.4s ease;
-    overflow: hidden;
-}
-
-.sidebar-glass:hover { width: 280px; }
-
-.nav-links { list-style: none; padding: 20px 0; }
-
-.nav-links li {
-    display: flex;
-    align-items: center;
-    padding: 15px 25px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.icon-frame {
-    min-width: 40px; height: 40px;
-    background: black;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center; align-items: center;
-    margin-right: 15px;
-}
-
-/* Fenêtres Dashboard 3D */
-.dashboard-grid {
-    margin-left: 100px;
-    padding: 100px 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    width: 100%;
+/* INSÈRE CECI À LA PLACE : */
+:root {
+    --gold: #D4AF37;
+    --glass-bg: rgba(255, 255, 255, 0.75); 
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --text-dark: #1a1a1a;
+    --accent-glow: rgba(212, 175, 55, 0.2);
 }
 
 .card-3d {
-    background: var(--pure-white);
-    border-radius: 25px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
     padding: 25px;
-    box-shadow: var(--shadow-3d);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.3s;
-    min-height: 180px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-height: 200px;
     position: relative;
     overflow: hidden;
 }
 
-.card-3d h3 { color: #333; margin-bottom: 20px; font-size: 1.1rem; }
+.card-3d:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 45px var(--accent-glow);
+    border: 1px solid var(--gold);
+}
 
+.card-3d h3 { 
+    color: var(--text-dark); 
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+    
 /* Animation Défilement Vertical */
 .ticker-container {
     height: 50px;
