@@ -23,7 +23,7 @@ authForm.addEventListener('submit', async (e) => {
         messageDisplay.innerText = "Erreur : Ce compte n'existe pas ou les identifiants sont incorrects.";
     } else {
         // C'EST CETTE PARTIE QUE TU REMPLACES
-        messageDisplay.style.color = "#D4AF37"; // Un joli doré pour rester dans ton thème
+        messageDisplay.style.color = "#2ECC71"; // Un joli vert pour rester dans ton thème
         messageDisplay.innerText = "Connexion réussie ! Préparation de votre espace...";
         
         // Redirection vers le tableau de bord après 1.5 seconde
