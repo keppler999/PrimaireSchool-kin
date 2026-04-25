@@ -3,130 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarite - Dashboard</title>
+    <title>SCHOLARITE - Ultra Dashboard</title>
     <link rel="stylesheet" href="dashboard-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div class="full-glass-overlay"></div>
 
-    <div class="background-overlay"></div>
-
-    <header class="main-header">
-        <div class="school-identity">
-            <div class="logo-upload">
-                <label for="logo-input">
-                    <img id="school-logo" src="https://via.placeholder.com/50" alt="Logo">
-                </label>
-                <input type="file" id="logo-input" hidden accept="image/*">
+    <div class="main-container">
+        <header class="ultra-header">
+            <div class="brand">
+                <h1>SCHOLARITE</h1>
+                <p>Système de Gestion Intégré</p>
             </div>
-            <input type="text" class="school-name-input" placeholder="Nom de l'école...">
-        </div>
-    </header>
+            <div class="stats-summary">
+                <canvas id="globalChart"></canvas>
+            </div>
+        </header>
 
-    <nav class="sidebar-glass">
-        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
-        <ul class="nav-links">
-            <li class="active"><div class="icon-frame"><i class="fas fa-chart-line"></i></div><span>Dashboard</span></li>
-            <li><div class="icon-frame"><i class="fas fa-user-graduate"></i></div><span>Casier élève</span></li>
-            <li><div class="icon-frame"><i class="fas fa-users-cog"></i></div><span>Gestion du personnel</span></li>
-            <li><div class="icon-frame"><i class="fas fa-sitemap"></i></div><span>Organisation académique</span></li>
-            <li><div class="icon-frame"><i class="fas fa-book"></i></div><span>Cours & Matières</span></li>
-            <li><div class="icon-frame"><i class="fas fa-chalkboard-teacher"></i></div><span>Enseignant</span></li>
-            <li><div class="icon-frame"><i class="fas fa-file-invoice"></i></div><span>Notes & Évaluations</span></li>
-            <li><div class="icon-frame"><i class="fas fa-user-check"></i></div><span>Présences & Discipline</span></li>
-            <li><div class="icon-frame"><i class="fas fa-wallet"></i></div><span>Finances</span></li>
-            <li><div class="icon-frame"><i class="fas fa-hands-helping"></i></div><span>Parents / Tuteurs</span></li>
-            <li><div class="icon-frame"><i class="fas fa-cog"></i></div><span>Settings</span></li>
-            <li><div class="icon-frame"><i class="fas fa-shield-alt"></i></div><span>Sécurité & Accès</span></li>
-        </ul>
-    </nav>
+        <main class="ultra-grid">
+            <div class="pin-card">
+                <div class="pin"></div>
+                <h3><i class="fas fa-user-graduate"></i> Casier Élève</h3>
+                <div class="step-ticker">
+                    <div class="step-content">
+                        <div class="step-item">Total: <span class="txt-gold">450</span></div>
+                        <div class="step-item">Présents: <span class="txt-green">412</span></div>
+                        <div class="step-item">Absents: <span class="txt-red">38</span></div>
+                    </div>
+                </div>
+            </div>
 
-    <main class="dashboard-grid">
-    
-    <div class="card-glass">
-        <h3><i class="fas fa-user-graduate"></i> Casier Élève</h3>
-        <div class="ticker-item">Total Élèves: <span class="txt-total" style="margin-left:10px;">450</span></div>
-        <div class="ticker-item">Présents: <span class="txt-present" style="margin-left:10px;">412</span></div>
-        <div class="ticker-item">Absents: <span class="txt-absent" style="margin-left:10px;">38</span></div>
+            <div class="pin-card">
+                <div class="pin"></div>
+                <h3><i class="fas fa-users-cog"></i> Personnel</h3>
+                <div class="step-ticker">
+                    <div class="step-content">
+                        <div class="step-item txt-green">M. Alain (P)</div>
+                        <div class="step-item txt-red">Mme Sarah (A)</div>
+                        <div class="step-item txt-blue">M. Robert (V)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pin-card">
+                <div class="pin"></div>
+                <h3><i class="fas fa-sitemap"></i> Académie</h3>
+                <div class="step-ticker">
+                    <div class="step-content">
+                        <div class="step-item">6e A: <span class="txt-yellow">12F</span> / <span class="txt-blue-l">15G</span></div>
+                        <div class="step-item">5e B: <span class="txt-yellow">18F</span> / <span class="txt-blue-l">10G</span></div>
+                    </div>
+                </div>
+            </div>
+
+            </main>
+
+        <footer class="ultra-footer">
+            <div class="user-profile-sticker">
+                <div class="user-info">
+                    <span class="name">Jean Dupont</span>
+                    <span class="role">Administrateur</span>
+                </div>
+                <div class="black-sticker">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <div class="card-glass">
-        <h3><i class="fas fa-users-cog"></i> Personnel</h3>
-        <div class="ticker-container">
-            <div class="ticker-content">
-                <div class="ticker-item txt-present">M. Alain (Présent)</div>
-                <div class="ticker-item txt-absent">Mme Sarah (Absente)</div>
-                <div class="ticker-item txt-vacances">M. Robert (Vacances)</div>
-                <div class="ticker-item txt-present">Mme Julie (Présente)</div>
-                <div class="ticker-item txt-present">M. Kevin (Présent)</div>
-                <div class="ticker-item txt-present">M. Alain (Présent)</div>
-                <div class="ticker-item txt-absent">Mme Sarah (Absente)</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-glass">
-        <h3><i class="fas fa-sitemap"></i> Académique</h3>
-        <div class="ticker-container">
-            <div class="ticker-content">
-                <div class="ticker-item">6e A (Jean): <span class="txt-fille">&nbsp;12F</span> / <span class="txt-garcon">&nbsp;15G</span> / <span class="txt-present">&nbsp;27T</span></div>
-                <div class="ticker-item">5e B (Claire): <span class="txt-fille">&nbsp;18F</span> / <span class="txt-garcon">&nbsp;10G</span> / <span class="txt-present">&nbsp;28T</span></div>
-                <div class="ticker-item">3e Elec (Kambale): <span class="txt-fille">&nbsp;0F</span> / <span class="txt-garcon">&nbsp;30G</span> / <span class="txt-present">&nbsp;30T</span></div>
-                <div class="ticker-item">6e A (Jean): <span class="txt-fille">&nbsp;12F</span></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-glass">
-        <h3><i class="fas fa-book"></i> Cours en Direct</h3>
-        <div class="ticker-container">
-            <div class="ticker-content">
-                <div class="ticker-item"><span class="txt-time">1h</span> 6eA: Math (Paul) - 25 Part.</div>
-                <div class="ticker-item txt-absent"><span class="txt-time">1h</span> 5eB: Bio (Luc - ABSENT)</div>
-                <div class="ticker-item"><span class="txt-time">2h</span> 3eElec: Schéma (Marc) - 30 Part.</div>
-                <div class="ticker-item"><span class="txt-time">1h</span> 6eA: Math (Paul)</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-glass">
-        <h3><i class="fas fa-chalkboard-teacher"></i> Enseignants (12)</h3>
-        <div class="ticker-container">
-            <div class="ticker-content">
-                <div class="ticker-item txt-present">1. M. Kambale</div>
-                <div class="ticker-item txt-present">2. M. Jean</div>
-                <div class="ticker-item txt-absent">3. Mme Marie</div>
-                <div class="ticker-item txt-present">4. M. Paul</div>
-                <div class="ticker-item txt-absent">5. Mme Alice</div>
-                <div class="ticker-item txt-present">6. M. Pierre</div>
-                <div class="ticker-item txt-present">7. M. Luc</div>
-                <div class="ticker-item txt-present">8. Mme Rose</div>
-                <div class="ticker-item txt-present">9. M. Eric</div>
-                <div class="ticker-item txt-absent">10. Mme Sophie</div>
-                <div class="ticker-item txt-present">11. M. David</div>
-                <div class="ticker-item txt-present">12. Mme Anne</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-glass">
-        <h3><i class="fas fa-file-invoice"></i> Moyennes Classes</h3>
-        <div class="ticker-container">
-            <div class="ticker-content">
-                <div class="ticker-item">1ère P (Marc): <span class="txt-gold">14.2/20</span></div>
-                <div class="ticker-item">2ème P (Lea): <span class="txt-gold">12.8/20</span></div>
-                <div class="ticker-item">3ème P (Jules): <span class="txt-gold">15.1/20</span></div>
-                <div class="ticker-item">6ème S (Guy): <span class="txt-gold">13.5/20</span></div>
-                <div class="ticker-item">1ère P (Marc): 14.2</div>
-            </div>
-        </div>
-    </div>
-
-    </main>
-    
-    
     <script src="dashboard-app.js"></script>
 </body>
 </html>
-
