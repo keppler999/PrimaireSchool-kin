@@ -1,15 +1,24 @@
 :root {
     --gold: #D4AF37;
-    --glass-pure: rgba(255, 255, 255, 0.15);
-    --glass-border: rgba(255, 255, 255, 0.3);
-    --dark-bg: #121212;
-    --gray-icon: #2c2c2c; /* Ton image grise pour les stickers */
+    --glass-pure: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --dark-bg: #000;
+    --gray-icon: #2c2c2c; 
 }
+
+/* Couleurs de données demandées */
+.txt-present { color: #2ecc71; font-weight: bold; } /* Vert clair */
+.txt-absent { color: #ff4d4d; font-weight: bold; }  /* Rouge clair */
+.txt-total { color: #f1c40f; font-weight: bold; }    /* Jaune */
+.txt-vacances { color: #3498db; font-weight: bold; } /* Bleu */
+.txt-fille { color: #f1c40f; font-weight: bold; }    /* Jaune */
+.txt-garcon { color: #5dade2; font-weight: bold; }   /* Bleu clair */
+.txt-time { color: #ffffff; background: #000; padding: 2px 6px; border-radius: 4px; margin-right: 5px; font-size: 0.8rem; }
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: #000;
+    background: var(--dark-bg);
     height: 100vh;
     overflow: hidden;
     display: flex;
@@ -21,18 +30,18 @@ body {
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1920') center/cover;
-    filter: blur(8px) brightness(0.6);
+    filter: blur(12px) brightness(0.5); /* Plus de flou pour la lisibilité */
     z-index: -1;
 }
 
-/* Sidebar avec Menu qui se déroule au CLIC */
+/* Sidebar avec Menu au CLIC */
 .sidebar-glass {
     width: 85px;
     height: 90vh;
     margin: auto 15px;
     background: var(--glass-pure);
-    backdrop-filter: blur(20px);
-    border-radius: 40px; /* Barres bien arrondies */
+    backdrop-filter: blur(25px);
+    border-radius: 40px;
     border: 1px solid var(--glass-border);
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
@@ -41,62 +50,48 @@ body {
 
 .sidebar-glass.open { width: 300px; }
 
-.nav-links { list-style: none; padding: 20px 10px; margin: 0; }
-
-.nav-links li {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    margin-bottom: 8px;
-    color: white;
-    cursor: pointer;
-    border-radius: 30px; /* Arrondi interne */
-    transition: 0.3s;
-}
-
-.nav-links li:hover { background: rgba(255,255,255,0.1); }
-
 .icon-frame {
     min-width: 50px; height: 50px;
-    background: var(--gray-icon); /* Stickers fond gris */
-    border-radius: 50%; /* Cercle parfait */
+    background: var(--gray-icon);
+    border-radius: 50%;
     display: flex;
     justify-content: center; align-items: center;
     margin-right: 15px;
     color: var(--gold);
-    font-size: 1.2rem;
 }
 
-/* Fenêtres "Épinglées" (Pinned Cards) */
+/* Fenêtres "Épinglées" */
 .dashboard-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 100px 30px 30px 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    padding: 110px 40px 40px 40px;
     overflow-y: auto;
 }
 
 .card-glass {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--glass-pure);
     backdrop-filter: blur(15px);
     border: 1px solid var(--glass-border);
     border-radius: 25px;
-    padding: 20px;
+    padding: 22px;
     position: relative;
     color: white;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    height: 200px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    overflow: hidden;
 }
 
-/* L'épingle décorative */
+/* L'épingle dorée */
 .card-glass::before {
     content: '';
     position: absolute;
-    top: 10px; right: 10px;
+    top: 15px; right: 15px;
     width: 8px; height: 8px;
     background: var(--gold);
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--gold);
+    box-shadow: 0 0 12px var(--gold);
 }
 
 .card-glass h3 {
@@ -104,34 +99,33 @@ body {
     text-transform: uppercase;
     color: var(--gold);
     margin: 0 0 15px 0;
-    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding-bottom: 8px;
 }
 
-/* ANIMATION DES DONNÉES (Le Ticker vivant) */
-.ticker-box {
-    height: 60px;
+/* ANIMATION DE DÉFILEMENT (Ticker Vertical) */
+.ticker-container {
+    height: 120px;
     overflow: hidden;
+    position: relative;
 }
 
 .ticker-content {
-    animation: slideUp 6s infinite ease-in-out;
-}
-
-.ticker-line {
-    height: 60px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: 700;
+    animation: scrollInfo 15s linear infinite; /* Défilement continu */
 }
 
-@keyframes slideUp {
-    0%, 25% { transform: translateY(0); }
-    33%, 58% { transform: translateY(-60px); }
-    66%, 91% { transform: translateY(-120px); }
-    100% { transform: translateY(0); }
+.ticker-content:hover { animation-play-state: paused; } /* Pause au survol */
+
+@keyframes scrollInfo {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
 }
 
-.green-val { color: #00ff88; text-shadow: 0 0 10px rgba(0,255,136,0.3); }
-.red-val { color: #ff4d4d; text-shadow: 0 0 10px rgba(255,77,77,0.3); }
+.ticker-item {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
