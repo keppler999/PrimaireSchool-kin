@@ -1,173 +1,121 @@
 :root {
     --gold: #D4AF37;
-    --glass: rgba(255, 255, 255, 0.15);
-    --border: rgba(255, 255, 255, 0.3);
-    --black: #0a0a0a;
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --sticker-bg: #0a0a0a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
-    height: 100vh;
-    display: flex;
-    font-family: 'Segoe UI', sans-serif;
-    overflow: hidden;
+    height: 100vh; display: flex; overflow: hidden;
+    background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1920') center/cover;
 }
 
-/* L'effet Verre Total */
-.full-screen-blur {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(15px);
-    z-index: 1;
+.glass-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(20px); z-index: 1;
 }
 
-/* Sidebar Stickers Noirs */
-.sidebar-stickers {
-    width: 100px;
-    background: var(--black);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 0;
+/* SIDEBAR */
+.cyber-sidebar {
+    width: 100px; background: var(--sticker-bg); z-index: 10;
+    display: flex; flex-direction: column; align-items: center; padding: 30px 0;
     border-right: 1px solid var(--gold);
 }
 
+.logo-wrapper {
+    width: 65px; height: 65px; border-radius: 15px; overflow: hidden;
+    border: 2px solid var(--gold); position: relative; cursor: pointer;
+}
+
+.logo-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
 .sticker {
-    width: 60px; height: 60px;
-    background: #1a1a1a;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center; align-items: center;
-    color: var(--gold);
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: 0.3s;
+    width: 55px; height: 55px; background: #1a1a1a; margin-top: 20px;
+    border-radius: 12px; display: flex; justify-content: center; align-items: center;
+    color: var(--gold); font-size: 1.4rem; cursor: pointer; transition: 0.3s;
 }
 
 .sticker.active, .sticker:hover {
-    background: var(--gold);
-    color: var(--black);
-    box-shadow: 0 0 20px var(--gold);
+    background: var(--gold); color: black; box-shadow: 0 0 20px var(--gold);
 }
 
-/* Main Content */
-.dashboard-core {
-    flex: 1;
-    z-index: 5;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
+/* CONTENT */
+.content-area {
+    flex: 1; position: relative; z-index: 5; padding: 30px;
+    display: flex; flex-direction: column; overflow-y: auto;
 }
 
-/* Header */
-.glass-header {
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border);
-    border-radius: 25px;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
+/* TRADING HEADER */
+.trading-header {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: 20px; padding: 15px 40px; display: flex;
+    justify-content: space-between; align-items: center; margin-bottom: 25px;
 }
 
-.glass-header h1 {
-    color: var(--gold);
-    font-size: 2.5rem;
-    letter-spacing: 6px;
+.glow-text {
+    color: var(--gold); letter-spacing: 6px; font-size: 2.2rem;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
 }
 
-.chart-container { width: 350px; height: 100px; }
+.chart-container { width: 450px; height: 100px; }
 
-/* Grid & Cards */
-.ultra-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+/* GRID & CARDS */
+.dashboard-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
 }
 
 .glass-card {
-    background: var(--glass);
-    border: 1px solid var(--border);
-    backdrop-filter: blur(10px);
-    border-radius: 25px;
-    padding: 25px;
-    height: 200px;
-    position: relative;
-    color: #000; /* Texte Noir profond sur verre */
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    overflow: hidden;
+    background: var(--glass); border: 1px solid var(--glass-border);
+    border-radius: 25px; padding: 25px; height: 200px; position: relative;
+    color: white; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
-.gold-pin {
-    position: absolute;
-    top: 15px; right: 15px;
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    box-shadow: 0 0 15px var(--gold);
+.pin {
+    position: absolute; top: 15px; right: 15px; width: 10px; height: 10px;
+    background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px var(--gold);
 }
 
-.glass-card h3 {
-    color: var(--gold);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
+.card-header h3 {
+    font-size: 0.8rem; color: var(--gold); letter-spacing: 2px;
+    margin-bottom: 15px; border-bottom: 1px solid rgba(212,175,55,0.2);
+    padding-bottom: 5px;
 }
 
-/* Animation PAS À PAS (Le Ticker) */
-.step-window {
-    height: 100px;
-    overflow: hidden;
+/* ANIMATION PAS À PAS */
+.step-window { height: 120px; overflow: hidden; }
+
+.step-engine {
+    display: flex; flex-direction: column;
+    animation: stepMove 24s steps(12) infinite;
 }
 
-.step-track {
-    display: flex;
-    flex-direction: column;
-    animation: stepScrolling 24s steps(12) infinite;
+@keyframes stepMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-1440px); } /* 120px * 12 */
 }
 
-@keyframes stepScrolling {
-    from { transform: translateY(0); }
-    to { transform: translateY(-1200px); } /* 100px par saut */
+.line-item {
+    height: 120px; display: flex; flex-direction: column;
+    justify-content: center; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.step-item {
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-weight: 800;
+/* COULEURS */
+.txt-green { color: #2ecc71; font-weight: bold; }
+.txt-red { color: #e74c3c; font-weight: bold; }
+.txt-gold { color: var(--gold); font-weight: bold; }
+.txt-yellow { color: #f1c40f; font-weight: bold; }
+.txt-blue { color: #3498db; font-weight: bold; }
+
+/* PROFIL */
+.profil-content {
+    display: flex; justify-content: space-between; align-items: center; height: 80%;
+}
+.black-circle-sticker {
+    width: 60px; height: 60px; background: black; border: 2px solid var(--gold);
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    color: var(--gold); font-size: 1.5rem;
 }
 
-/* Profil & Stickers */
-.profile-layout {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-}
-
-.black-sticker-circle {
-    width: 60px; height: 60px;
-    background: var(--black);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center; align-items: center;
-    color: var(--gold);
-    border: 2px solid var(--gold);
-}
-
-/* Couleurs Stats */
-.txt-green { color: #008000; }
-.txt-red { color: #b30000; }
-.txt-yellow { color: #cca300; }
-.txt-gold { color: #8a6d00; }
