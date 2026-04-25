@@ -1,82 +1,79 @@
-// 1. LE GRAPHIQUE (Header)
-const ctx = document.getElementById('mainChart').getContext('2d');
+// 1. LE GRAPHIQUE STYLE TRADING (Header)
+const ctx = document.getElementById('tradingChart').getContext('2d');
 new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7'],
+        labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
         datasets: [{
-            data: [40, 60, 55, 80, 75, 90, 100],
+            data: [40, 65, 55, 90, 85, 95],
             borderColor: '#D4AF37',
-            backgroundColor: 'rgba(212, 175, 55, 0.2)',
+            backgroundColor: 'rgba(212, 175, 55, 0.1)',
             fill: true,
             tension: 0.4,
             pointRadius: 0
         }]
     },
     options: {
-        responsive: true,
-        maintainAspectRatio: false,
+        responsive: true, maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: { x: { display: false }, y: { display: false } }
     }
 });
 
-// 2. GÉNÉRATEUR DE DONNÉES (Programme RDC)
-const classesRDC = ["1ère EP", "2ème EP", "3ème EP", "4ème EP", "5ème EP", "6ème EP", "1ère EB", "2ème EB", "3ème EB", "4ème EB", "5ème EB", "6ème EB"];
-const staffNames = ["M. Kambale", "Mme Sarah", "M. Jean", "Mme Bahati", "M. Luc", "Mme Rose", "M. Pierre", "Mme Julie", "M. Eric", "Mme Sophie", "M. Marc", "Mme Lea"];
-const matieres = ["Maths", "Français", "Sciences", "Civisme", "Histoire", "Calcul", "Dessin", "Géo", "Dictée", "Relig.", "Sport", "Musique"];
+// 2. DONNÉES RDC (12 Classes)
+const rdcClasses = ["1ère EP", "2ème EP", "3ème EP", "4ème EP", "5ème EP", "6ème EP", "7ème EB", "8ème EB", "1ère Hum", "2ème Hum", "3ème Hum", "4ème Hum"];
+const staffNames = ["M. Kambale", "Mme Musau", "M. Kabasele", "Mme Bahati", "M. Luvumbu", "M. Diallo", "Mme Zola", "M. Tshimanga", "M. Ndoki", "Mme Malu", "M. Yengo", "Mme Biola"];
 
-// Fonction pour injecter les lignes
-const populate = (id, callback) => {
-    const el = document.getElementById(id);
+// Fonction d'injection
+function fillStep(elementId, contentGenerator) {
+    const engine = document.getElementById(elementId);
     for(let i=0; i<12; i++) {
-        const div = document.createElement('div');
-        div.className = 'step-item';
-        div.innerHTML = callback(i);
-        el.appendChild(div);
+        engine.innerHTML += `<div class="line-item">${contentGenerator(i)}</div>`;
     }
-};
+}
 
-// Remplissage Personnel
-populate('track-personnel', (i) => `
-    <span>${staffNames[i]}</span>
-    <span class="${i%3==0 ? 'txt-red' : 'txt-green'}">${i%3==0 ? 'ABSENT' : 'PRÉSENT'}</span>
-`);
-
-// Académie
-populate('track-academie', (i) => `
-    <span>${classesRDC[i]} | ${staffNames[i]}</span>
-    <span><span class="txt-yellow">15F</span> / <span class="txt-gold">15G</span> | Total: 30</span>
+// Académique
+fillStep('engine-academy', (i) => `
+    <span>${rdcClasses[i]} | ${staffNames[i]}</span>
+    <span style="font-size:0.9rem"><span class="txt-yellow">15F</span> / <span class="txt-blue">15G</span> | Total: <span class="txt-green">30</span></span>
 `);
 
 // Live Cours
-populate('track-live', (i) => `
-    <span>${8+i}h00 : ${classesRDC[i]}</span>
-    <span>${matieres[i]} (${staffNames[i]})</span>
+const courses = ["Maths", "Français", "Sciences", "Histoire", "Dessin", "Civisme", "Géo", "Calcul", "Dictée", "Sport", "Musique", "Religion"];
+fillStep('engine-live', (i) => `
+    <span><span class="txt-blue">${8+i}h00</span> : ${courses[i]}</span>
+    <span style="font-size:0.8rem">Prof: ${staffNames[i]}</span>
+`);
+
+// Personnel Statut
+fillStep('engine-personnel', (i) => `
+    <span>${staffNames[i]}</span>
+    <span class="${i%3==0?'txt-green':i%3==1?'txt-red':'txt-gold'}">${i%3==0?'PRÉSENT':i%3==1?'ABSENT':'VACANCES'}</span>
 `);
 
 // Notes
-populate('track-notes', (i) => `
-    <span>Classe: ${classesRDC[i]}</span>
-    <span class="txt-gold">Moyenne: ${(Math.random()*40 + 50).toFixed(1)}%</span>
+fillStep('engine-notes', (i) => `
+    <span>${rdcClasses[i]}</span>
+    <span class="txt-gold">Réussite: ${(Math.random()*40 + 60).toFixed(1)}%</span>
 `);
 
 // Finances
-populate('track-finances', (i) => `
-    <span>Finance ${classesRDC[i]}</span>
-    <span>Payé: <span class="txt-green">${Math.floor(Math.random()*40 + 60)}%</span></span>
+fillStep('engine-finance', (i) => `
+    <span>${rdcClasses[i]}</span>
+    <span>Payé: <span class="txt-green">${Math.floor(Math.random()*50+50)}%</span> | Reste: <span class="txt-red">${Math.floor(Math.random()*20)}%</span></span>
 `);
 
-// Staff
-populate('track-staff', (i) => `
+// Staff Fonctions
+const fonctions = ["Directeur", "Comptable", "Secrétaire", "Préfet", "Sentinelle", "Ouvrier", "Titulaire", "Titulaire", "Bibliothécaire", "Informaticien", "Coach", "Cantine"];
+fillStep('engine-staff-list', (i) => `
     <span>${staffNames[i]}</span>
-    <small>FONCTION: ENSEIGNANT</small>
+    <span style="font-size:0.8rem; color:var(--gold)">${fonctions[i]}</span>
 `);
 
-// 3. LOGO UPLOAD
-document.getElementById('logo-input').addEventListener('change', function(e) {
+// Import Logo
+document.getElementById('logo-upload').addEventListener('change', function(e) {
     const reader = new FileReader();
-    reader.onload = (event) => document.getElementById('school-logo').src = event.target.result;
+    reader.onload = (event) => document.getElementById('display-logo').src = event.target.result;
     reader.readAsDataURL(e.target.files[0]);
 });
 
