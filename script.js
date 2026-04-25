@@ -22,11 +22,17 @@ authForm.addEventListener('submit', async (e) => {
         messageDisplay.style.color = "red";
         messageDisplay.innerText = "Erreur : Ce compte n'existe pas ou les identifiants sont incorrects.";
     } else {
-        messageDisplay.style.color = "green";
-        messageDisplay.innerText = "Connexion réussie ! Bienvenue sur Scholarite.";
-        // Ici, redirection vers le tableau de bord
+        // C'EST CETTE PARTIE QUE TU REMPLACES
+        messageDisplay.style.color = "#D4AF37"; // Un joli doré pour rester dans ton thème
+        messageDisplay.innerText = "Connexion réussie ! Préparation de votre espace...";
+        
+        // Redirection vers le tableau de bord après 1.5 seconde
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 1500);
     }
 });
+
 
 // Fonction pour la Création de compte
 document.getElementById('btn-signup').addEventListener('click', async () => {
