@@ -1,16 +1,16 @@
-// 1. GÉNÉRATION DU GRAPHIQUE STATISTIQUE
-const ctx = document.getElementById('headerChart').getContext('2d');
+// 1. LE GRAPHIQUE (Header)
+const ctx = document.getElementById('mainChart').getContext('2d');
 new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        labels: ['J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7'],
         datasets: [{
-            label: 'Présence globale %',
-            data: [92, 88, 95, 91, 85, 98],
+            data: [40, 60, 55, 80, 75, 90, 100],
             borderColor: '#D4AF37',
-            backgroundColor: 'rgba(212, 175, 55, 0.1)',
+            backgroundColor: 'rgba(212, 175, 55, 0.2)',
             fill: true,
-            tension: 0.4
+            tension: 0.4,
+            pointRadius: 0
         }]
     },
     options: {
@@ -21,51 +21,62 @@ new Chart(ctx, {
     }
 });
 
-// 2. DONNÉES CONGOLAISES (Simulation des 12 classes/profs)
-const classes = ["1ère EP", "2ème EP", "3ème EP", "4ème EP", "5ème EP", "6ème EP", "7ème EB", "8ème EB", "1ère Hum", "2ème Hum", "3ème Hum", "4ème Hum"];
-const profs = ["M. Kambale", "Mme Musau", "M. Bolamba", "Mme Ifeka", "M. Kalala", "Mme Ngoya", "M. Mwamba", "Mme Zola", "M. Bakari", "Mme Kabasele", "M. Tshimbulu", "Mme Panzu"];
-const cours = ["Mathématiques", "Français", "Éveil", "Religion", "Sciences", "Géographie", "Histoire", "Dessin", "Éducation Physique", "Anglais", "Civisme", "Technologie"];
+// 2. GÉNÉRATEUR DE DONNÉES (Programme RDC)
+const classesRDC = ["1ère EP", "2ème EP", "3ème EP", "4ème EP", "5ème EP", "6ème EP", "1ère EB", "2ème EB", "3ème EB", "4ème EB", "5ème EB", "6ème EB"];
+const staffNames = ["M. Kambale", "Mme Sarah", "M. Jean", "Mme Bahati", "M. Luc", "Mme Rose", "M. Pierre", "Mme Julie", "M. Eric", "Mme Sophie", "M. Marc", "Mme Lea"];
+const matieres = ["Maths", "Français", "Sciences", "Civisme", "Histoire", "Calcul", "Dessin", "Géo", "Dictée", "Relig.", "Sport", "Musique"];
 
-// Injecter Académie
-const academieScroll = document.getElementById('academie-scroll');
-classes.forEach((c, i) => {
-    academieScroll.innerHTML += `
-        <div class="step-box">
-            <b>${c}</b> - Prof: ${profs[i]}<br>
-            <span class="txt-yellow">15 F</span> | <span class="txt-gold">15 G</span> | Total: 30
-        </div>`;
-});
-
-// Injecter Live Cours
-const liveScroll = document.getElementById('live-scroll');
-classes.forEach((c, i) => {
-    liveScroll.innerHTML += `
-        <div class="step-box">
-            <span class="txt-gold">08:30</span> - ${c}<br>
-            Cours: ${cours[i]}
-        </div>`;
-});
-
-// Injecter Notes
-const notesScroll = document.getElementById('notes-scroll');
-classes.forEach((c, i) => {
-    let note = Math.floor(Math.random() * (95 - 60) + 60);
-    notesScroll.innerHTML += `<div class="step-box">${c}: <span class="txt-green">${note}%</span></div>`;
-});
-
-// 3. GESTION LOGO
-const logoInput = document.getElementById('logo-input');
-const schoolLogo = document.getElementById('school-logo');
-const logoContainer = document.getElementById('school-logo-container');
-
-logoContainer.onclick = () => logoInput.click();
-logoInput.onchange = (e) => {
-    const reader = new FileReader();
-    reader.onload = (ev) => schoolLogo.src = ev.target.result;
-    reader.readAsDataURL(e.target.files[0]);
+// Fonction pour injecter les lignes
+const populate = (id, callback) => {
+    const el = document.getElementById(id);
+    for(let i=0; i<12; i++) {
+        const div = document.createElement('div');
+        div.className = 'step-item';
+        div.innerHTML = callback(i);
+        el.appendChild(div);
+    }
 };
 
-// Récupérer le nom de l'utilisateur stocké (si tu l'as depuis ta page login)
-const userName = localStorage.getItem('user_full_name') || "Jean Dupont";
-document.getElementById('user-display-name').innerText = userName;
-                
+// Remplissage Personnel
+populate('track-personnel', (i) => `
+    <span>${staffNames[i]}</span>
+    <span class="${i%3==0 ? 'txt-red' : 'txt-green'}">${i%3==0 ? 'ABSENT' : 'PRÉSENT'}</span>
+`);
+
+// Académie
+populate('track-academie', (i) => `
+    <span>${classesRDC[i]} | ${staffNames[i]}</span>
+    <span><span class="txt-yellow">15F</span> / <span class="txt-gold">15G</span> | Total: 30</span>
+`);
+
+// Live Cours
+populate('track-live', (i) => `
+    <span>${8+i}h00 : ${classesRDC[i]}</span>
+    <span>${matieres[i]} (${staffNames[i]})</span>
+`);
+
+// Notes
+populate('track-notes', (i) => `
+    <span>Classe: ${classesRDC[i]}</span>
+    <span class="txt-gold">Moyenne: ${(Math.random()*40 + 50).toFixed(1)}%</span>
+`);
+
+// Finances
+populate('track-finances', (i) => `
+    <span>Finance ${classesRDC[i]}</span>
+    <span>Payé: <span class="txt-green">${Math.floor(Math.random()*40 + 60)}%</span></span>
+`);
+
+// Staff
+populate('track-staff', (i) => `
+    <span>${staffNames[i]}</span>
+    <small>FONCTION: ENSEIGNANT</small>
+`);
+
+// 3. LOGO UPLOAD
+document.getElementById('logo-input').addEventListener('change', function(e) {
+    const reader = new FileReader();
+    reader.onload = (event) => document.getElementById('school-logo').src = event.target.result;
+    reader.readAsDataURL(e.target.files[0]);
+});
+
