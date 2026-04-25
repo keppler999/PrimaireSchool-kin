@@ -3,141 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCHOLARITE | Centre de Commandement</title>
+    <title>SCHOLARITE - Ultra Glass UI</title>
     <link rel="stylesheet" href="dashboard-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="glass-overlay"></div>
+    <div class="full-screen-blur"></div>
 
-    <div class="app-wrapper">
-        <aside class="sidebar-noir">
-            <div class="logo-area" id="school-logo-container">
-                <img src="https://via.placeholder.com/60" id="school-logo" alt="Logo">
+    <nav class="sidebar-stickers">
+        <div class="school-brand">
+            <div class="logo-box">
+                <img id="school-logo" src="" alt="">
+                <label for="logo-input"><i class="fas fa-camera"></i></label>
                 <input type="file" id="logo-input" hidden>
             </div>
-            <nav class="nav-stickers">
-                <div class="sticker-item active" title="Dashboard"><i class="fas fa-th-large"></i></div>
-                <div class="sticker-item" title="Casier Élève"><i class="fas fa-user-graduate"></i></div>
-                <div class="sticker-item" title="Personnel"><i class="fas fa-users-cog"></i></div>
-                <div class="sticker-item" title="Académique"><i class="fas fa-graduation-cap"></i></div>
-                <div class="sticker-item" title="Live Cours"><i class="fas fa-broadcast-tower"></i></div>
-                <div class="sticker-item" title="Enseignant"><i class="fas fa-chalkboard-teacher"></i></div>
-                <div class="sticker-item" title="Notes"><i class="fas fa-file-invoice"></i></div>
-                <div class="sticker-item" title="Finances"><i class="fas fa-wallet"></i></div>
-                <div class="sticker-item" title="Staff"><i class="fas fa-user-shield"></i></div>
-                <div class="sticker-item" title="User"><i class="fas fa-user-circle"></i></div>
-                <div class="sticker-item" title="Settings"><i class="fas fa-cog"></i></div>
-            </nav>
-        </aside>
+        </div>
+        <div class="sticker-list">
+            <div class="sticker active"><i class="fas fa-th-large"></i></div>
+            <div class="sticker"><i class="fas fa-user-graduate"></i></div>
+            <div class="sticker"><i class="fas fa-users-cog"></i></div>
+            <div class="sticker"><i class="fas fa-university"></i></div>
+            <div class="sticker"><i class="fas fa-broadcast-tower"></i></div>
+            <div class="sticker"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div class="sticker"><i class="fas fa-file-invoice"></i></div>
+            <div class="sticker"><i class="fas fa-wallet"></i></div>
+            <div class="sticker"><i class="fas fa-user-tie"></i></div>
+            <div class="sticker"><i class="fas fa-user-circle"></i></div>
+            <div class="sticker"><i class="fas fa-cog"></i></div>
+        </div>
+    </nav>
 
-        <main class="content-area">
-            <header class="main-header">
-                <div class="brand-section">
-                    <h1>SCHOLARITE</h1>
-                    <div class="live-indicator"><span class="dot"></span> SYSTÈME LIVE</div>
-                </div>
-                <div class="chart-container">
-                    <canvas id="headerChart"></canvas>
-                </div>
-            </header>
+    <main class="dashboard-core">
+        <header class="glass-header">
+            <div class="title-group">
+                <h1>SCHOLARITE</h1>
+                <span class="live-tag">● LIVE STATS</span>
+            </div>
+            <div class="chart-container">
+                <canvas id="mainChart"></canvas>
+            </div>
+        </header>
 
-            <div class="grid-container">
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-door-open"></i> Casier Élève</h3>
-                    <div class="static-data">
-                        <p>Total: <span class="txt-yellow">450</span></p>
-                        <p>Présents: <span class="txt-green">412</span></p>
-                        <p>Absents: <span class="txt-red">38</span></p>
-                    </div>
-                </div>
-
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-id-badge"></i> Personnel</h3>
-                    <div class="step-wrapper">
-                        <div class="step-scroll">
-                            <div class="step-box"><span class="txt-green">M. Alain</span> (Présent)</div>
-                            <div class="step-box"><span class="txt-red">Mme Sarah</span> (Absente)</div>
-                            <div class="step-box"><span class="txt-gold">M. Robert</span> (Vacances)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-school"></i> Académie</h3>
-                    <div class="step-wrapper">
-                        <div class="step-scroll" id="academie-scroll">
-                            </div>
-                    </div>
-                </div>
-
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-play-circle"></i> Live Cours</h3>
-                    <div class="step-wrapper">
-                        <div class="step-scroll" id="live-scroll">
-                            </div>
-                    </div>
-                </div>
-
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-chalkboard-teacher"></i> Enseignants</h3>
-                    <div class="step-wrapper">
-                        <div class="step-scroll" id="teacher-scroll"></div>
-                    </div>
-                </div>
-
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-star"></i> Notes (%)</h3>
-                    <div class="step-wrapper">
-                        <div class="step-scroll" id="notes-scroll"></div>
-                    </div>
-                </div>
-
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-clock"></i> Emploi du Temps</h3>
-                    <div class="static-data">
-                        <p>Cours prévus: 8</p>
-                        <p>Exécutés: <span class="txt-green">6 (75%)</span></p>
-                    </div>
-                </div>
-
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-money-bill-wave"></i> Finances</h3>
-                    <div class="step-wrapper">
-                        <div class="step-scroll" id="finance-scroll"></div>
-                    </div>
-                </div>
-
-                <div class="glass-card pinned">
-                    <div class="pin"></div>
-                    <h3><i class="fas fa-user-shield"></i> Staff</h3>
-                    <div class="step-wrapper">
-                        <div class="step-scroll" id="staff-scroll"></div>
-                    </div>
-                </div>
-
-                </div>
+        <div class="ultra-grid">
             
-            <footer class="user-footer">
-                <div class="profile-pill">
-                    <div class="p-text">
-                        <span id="user-display-name">Jean Dupont</span>
-                        <small>Administrateur</small>
-                    </div>
-                    <div class="p-sticker"><i class="fas fa-user"></i></div>
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3><i class="fas fa-user-graduate"></i> Casier Élève</h3>
+                <div class="data-block">
+                    <div class="val">Total: <span class="txt-yellow">450</span></div>
+                    <div class="val">Présents: <span class="txt-green">412</span></div>
+                    <div class="val">Absents: <span class="txt-red">38</span></div>
                 </div>
-            </footer>
-        </main>
-    </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3>Personnel</h3>
+                <div class="step-window">
+                    <div class="step-track" id="track-personnel"></div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3>Académie</h3>
+                <div class="step-window">
+                    <div class="step-track" id="track-academie"></div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3>Live Cours</h3>
+                <div class="step-window">
+                    <div class="step-track" id="track-live"></div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3>Enseignants</h3>
+                <div class="step-window">
+                    <div class="step-track" id="track-teachers"></div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3>Notes %</h3>
+                <div class="step-window">
+                    <div class="step-track" id="track-notes"></div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3>Emploi du temps</h3>
+                <div class="data-block">
+                    <div class="val">Prévus: <span>08</span></div>
+                    <div class="val">Exécutés: <span class="txt-green">05</span></div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3>Finances</h3>
+                <div class="step-window">
+                    <div class="step-track" id="track-finances"></div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="gold-pin"></div>
+                <h3>Staff</h3>
+                <div class="step-window">
+                    <div class="step-track" id="track-staff"></div>
+                </div>
+            </div>
+
+            <div class="glass-card"><div class="gold-pin"></div><h3>Alertes</h3><p>Rien à signaler</p></div>
+            <div class="glass-card"><div class="gold-pin"></div><h3>Calendrier</h3><p>Réunion 14h</p></div>
+
+            <div class="glass-card profile">
+                <div class="gold-pin"></div>
+                <div class="profile-layout">
+                    <div class="user-txt">
+                        <small>Utilisateur</small>
+                        <h2 id="display-name">Kambale Jean</h2>
+                    </div>
+                    <div class="black-sticker-circle">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
 
     <script src="dashboard-app.js"></script>
 </body>
