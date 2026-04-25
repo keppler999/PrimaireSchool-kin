@@ -1,79 +1,104 @@
-// 1. LE GRAPHIQUE STYLE TRADING (Header)
-const ctx = document.getElementById('tradingChart').getContext('2d');
+// CONFIGURATION DU GRAPHIQUE (Header)
+const ctx = document.getElementById('mainChart').getContext('2d');
 new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
         datasets: [{
-            data: [40, 65, 55, 90, 85, 95],
+            label: 'Pourcentage (%)',
+            data: [65, 82, 70, 95, 88, 75, 90],
             borderColor: '#D4AF37',
-            backgroundColor: 'rgba(212, 175, 55, 0.1)',
+            backgroundColor: 'rgba(212, 175, 55, 0.2)',
             fill: true,
-            tension: 0.4,
-            pointRadius: 0
+            tension: 0.4
         }]
     },
     options: {
-        responsive: true, maintainAspectRatio: false,
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: { legend: { display: false } },
-        scales: { x: { display: false }, y: { display: false } }
+        scales: { 
+            x: { grid: { display: false }, ticks: { color: '#fff' } },
+            y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#fff' } }
+        }
     }
 });
 
-// 2. DONNÉES RDC (12 Classes)
-const rdcClasses = ["1ère EP", "2ème EP", "3ème EP", "4ème EP", "5ème EP", "6ème EP", "7ème EB", "8ème EB", "1ère Hum", "2ème Hum", "3ème Hum", "4ème Hum"];
-const staffNames = ["M. Kambale", "Mme Musau", "M. Kabasele", "Mme Bahati", "M. Luvumbu", "M. Diallo", "Mme Zola", "M. Tshimanga", "M. Ndoki", "Mme Malu", "M. Yengo", "Mme Biola"];
+// DONNÉES RDC (12 Classes)
+const classes = ["1ère EP", "2ème EP", "3ème EP", "4ème EP", "5ème EP", "6ème EP", "7ème EB", "8ème EB", "1ère Hum", "2ème Hum", "3ème Hum", "4ème Hum"];
+const profs = ["M. Kambale", "Mme Sarah", "M. Kabasele", "Mme Bahati", "M. Luvumbu", "M. Diallo", "Mme Zola", "M. Tshimanga", "M. Ndoki", "Mme Malu", "M. Yengo", "Mme Biola"];
+const matieresList = ["Maths", "Français", "Sciences", "Histoire", "Civisme", "Calcul", "Dictée", "Géographie", "Dessin", "Musique", "Religion", "Sport"];
 
-// Fonction d'injection
-function fillStep(elementId, contentGenerator) {
-    const engine = document.getElementById(elementId);
-    for(let i=0; i<12; i++) {
-        engine.innerHTML += `<div class="line-item">${contentGenerator(i)}</div>`;
+// Fonction de remplissage
+function fillBox(id, callback) {
+    const box = document.getElementById(id);
+    let html = '';
+    for(let i=0; i < 24; i++) { // Doublé pour la boucle infinie
+        html += `<div class="scroll-item">${callback(i % 12)}</div>`;
     }
+    box.innerHTML = html;
 }
 
-// Académique
-fillStep('engine-academy', (i) => `
-    <span>${rdcClasses[i]} | ${staffNames[i]}</span>
-    <span style="font-size:0.9rem"><span class="txt-yellow">15F</span> / <span class="txt-blue">15G</span> | Total: <span class="txt-green">30</span></span>
+// 1. Personnel
+fillBox('loop-personnel', (i) => `
+    <span>${profs[i]}</span>
+    <span class="${i%3===0 ? 'txt-green' : i%3===1 ? 'txt-red' : 'txt-gold'}">
+        ${i%3===0 ? 'PRÉSENT' : i%3===1 ? 'ABSENT' : 'VACANCES'}
+    </span>
 `);
 
-// Live Cours
-const courses = ["Maths", "Français", "Sciences", "Histoire", "Dessin", "Civisme", "Géo", "Calcul", "Dictée", "Sport", "Musique", "Religion"];
-fillStep('engine-live', (i) => `
-    <span><span class="txt-blue">${8+i}h00</span> : ${courses[i]}</span>
-    <span style="font-size:0.8rem">Prof: ${staffNames[i]}</span>
+// 2. Académie
+fillBox('loop-academie', (i) => `
+    <span>${classes[i]} | ${profs[i]}</span>
+    <span>F: <span class="txt-yellow">15</span> / G: <span class="txt-gold">15</span> | Total: 30</span>
 `);
 
-// Personnel Statut
-fillStep('engine-personnel', (i) => `
-    <span>${staffNames[i]}</span>
-    <span class="${i%3==0?'txt-green':i%3==1?'txt-red':'txt-gold'}">${i%3==0?'PRÉSENT':i%3==1?'ABSENT':'VACANCES'}</span>
+// 3. Matières
+fillBox('loop-matieres', (i) => `
+    <span>${8+i}h00 | ${classes[i]}</span>
+    <span>${matieresList[i]} (${profs[i]})</span>
 `);
 
-// Notes
-fillStep('engine-notes', (i) => `
-    <span>${rdcClasses[i]}</span>
-    <span class="txt-gold">Réussite: ${(Math.random()*40 + 60).toFixed(1)}%</span>
+// 4. Enseignants
+fillBox('loop-profs', (i) => `
+    <span>${profs[i]}</span>
+    <span class="${i%2===0 ? 'txt-green' : 'txt-red'}">${i%2===0 ? 'ACTIF' : 'HORS LIGNE'}</span>
 `);
 
-// Finances
-fillStep('engine-finance', (i) => `
-    <span>${rdcClasses[i]}</span>
-    <span>Payé: <span class="txt-green">${Math.floor(Math.random()*50+50)}%</span> | Reste: <span class="txt-red">${Math.floor(Math.random()*20)}%</span></span>
+// 5. Notes
+fillBox('loop-notes', (i) => `
+    <span>${classes[i]}</span>
+    <span class="txt-gold">Moyenne: ${(Math.random() * 40 + 50).toFixed(1)}%</span>
 `);
 
-// Staff Fonctions
-const fonctions = ["Directeur", "Comptable", "Secrétaire", "Préfet", "Sentinelle", "Ouvrier", "Titulaire", "Titulaire", "Bibliothécaire", "Informaticien", "Coach", "Cantine"];
-fillStep('engine-staff-list', (i) => `
-    <span>${staffNames[i]}</span>
-    <span style="font-size:0.8rem; color:var(--gold)">${fonctions[i]}</span>
+// 6. Finances
+fillBox('loop-finances', (i) => `
+    <span>${classes[i]}</span>
+    <span>Payé: <span class="txt-green">75%</span> | Reste: <span class="txt-red">25%</span></span>
 `);
 
-// Import Logo
-document.getElementById('logo-upload').addEventListener('change', function(e) {
-    const reader = new FileReader();
-    reader.onload = (event) => document.getElementById('display-logo').src = event.target.result;
-    reader.readAsDataURL(e.target.files[0]);
-});
+// 7. Staff
+const fonctions = ["Directeur", "Préfet", "Comptable", "Secrétaire", "Intendant", "Sentinelle"];
+fillBox('loop-staff', (i) => `
+    <span>${profs[i]}</span>
+    <span class="txt-gold">${fonctions[i % 6]}</span>
+`);
 
+// Gestion Logo
+const logoTrigger = document.getElementById('logo-trigger');
+const logoInput = document.getElementById('logo-input');
+const schoolLogo = document.getElementById('school-logo');
+
+logoTrigger.onclick = () => logoInput.click();
+logoInput.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            schoolLogo.src = ev.target.result;
+            schoolLogo.style.display = 'block';
+            logoTrigger.querySelector('i').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    }
+};
