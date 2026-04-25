@@ -8,126 +8,38 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-        <div class="glass-container">
-        <form id="auth-form" class="glass-form">
-            <h1>Scholarite</h1>
-            <h2>Se connecter</h2>
-            <div class="button-group">
-                <button type="submit" id="btn-login" class="btn-primary">Se connecter</button>
-                <button type="button" id="btn-signup" class="btn-secondary">Créer un compte</button>
-            </div>
-            <p id="message" class="status-message"></p>
-        </form>
-    </div> 
-
-</div> <script src="app.js"></script>
-</body>
-    
-        <div class="bg-dashboard"></div>
-
-        <header class="top-bar glass">
-            <div class="school-identity">
-                <img src="https://cdn-icons-png.flaticon.com/512/5351/5351331.png" alt="Logo" class="school-logo">
-                <span class="school-name">NOM DE L'ÉCOLE</span>
-            </div>
-        </header>
-       
-    <div class="main-layout">
-        <nav class="side-menu glass">
-            <ul>
-                <li class="active"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828762.png"> Dashboard</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/2940/2940651.png"> Casier élève</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/912/912318.png"> Gestion personnel</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/2641/2641409.png"> Organisation acad.</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/3426/3426653.png"> Cours & Matières</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/1995/1995539.png"> Enseignant</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/3503/3503816.png"> Notes & Évaluations</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/3211/3211181.png"> Présences & Discipline</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/2761/2761118.png"> Finances</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/4370/4370685.png"> Parents / Tuteurs</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png"> Settings</li>
-                <li><img src="https://cdn-icons-png.flaticon.com/512/1162/1162456.png"> Sécurité & Accès</li>
-            </ul>
-        </nav>
-
-        <main class="dashboard-content">
-            <div class="grid-container">
-                <div class="card glass">
-                    <h3>Casier Élève (Aujourd'hui)</h3>
-                    <div class="stat-row">
-                        <span class="label">Présents:</span> <span class="value-green">1,240</span>
-                    </div>
-                    <div class="stat-row">
-                        <span class="label">Absents:</span> <span class="value-red">12</span>
-                    </div>
-                </div>
-
-                <div class="card glass">
-                    <h3>Présence Personnel</h3>
-                    <table class="stat-table">
-                        <tr><th>Rôle</th><th>Prés.</th><th>Abs.</th></tr>
-                        <tr><td>Enseignants</td><td>45</td><td>2</td></tr>
-                        <tr><td>Admin</td><td>10</td><td>0</td></tr>
-                        <tr><td>Autres</td><td>15</td><td>1</td></tr>
-                    </table>
-                </div>
-
-                <div class="card glass">
-                    <h3>Organisation par Classe</h3>
-                    <div class="scroll-box">
-                        <p><strong>1ère A:</strong> 15F / 12G (Tit: M. Kabuya)</p>
-                        <p><strong>2ème B:</strong> 14F / 16G (Tit: Mme Luvaka)</p>
-                    </div>
-                </div>
-
-                <div class="card glass">
-                    <h3>Cours en cours</h3>
-                    <ul class="live-list">
-                        <li><span class="time">14h00</span> 3ème Elec - Électricité Générale</li>
-                        <li><span class="time">14h00</span> 4ème Math - Algèbre</li>
-                    </ul>
-                </div>
-
-                <div class="card glass">
-                    <h3>Statut Enseignants</h3>
-                    <div class="status-indicator">
-                        <span class="dot active"></span> 38 Actifs en salle
-                    </div>
-                    <div class="status-indicator">
-                        <span class="dot inactive"></span> 7 Libres
-                    </div>
-                </div>
-
-                <div class="card glass">
-                    <h3>Moyennes par Classe</h3>
-                    <div class="scroll-box">
-                        <div class="progress-bar-container">
-                            <span>6ème Litt : 72%</span>
-                            <div class="bar"><div class="fill" style="width: 72%;"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-    </div>
-    
 
     <div class="background-overlay"></div>
 
-        <div class="glass-container">
+    <div class="glass-container">
         <form id="auth-form" class="glass-form">
             <h1>Scholarite</h1>
             <h2>Se connecter</h2>
+            
+            <div class="input-group">
+                <label for="username">Nom complet</label>
+                <input type="text" id="username" placeholder="Ex: Jean Dupont" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Adresse Email</label>
+                <input type="email" id="email" placeholder="email@exemple.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
             <div class="button-group">
                 <button type="submit" id="btn-login" class="btn-primary">Se connecter</button>
                 <button type="button" id="btn-signup" class="btn-secondary">Créer un compte</button>
             </div>
+            
             <p id="message" class="status-message"></p>
         </form>
-    </div> 
+    </div>
 
-</div> <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
-    
 </html>
