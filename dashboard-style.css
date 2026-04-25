@@ -1,156 +1,100 @@
 :root {
     --gold: #D4AF37;
-    --glass: rgba(255, 255, 255, 0.1);
-    --glass-heavy: rgba(30, 30, 30, 0.7); /* Verre sombre pour l'immersion */
-    --text-black: #000000;
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --yellow: #f1c40f;
+    --glass-bg: rgba(20, 20, 20, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-body, html {
-    margin: 0; padding: 0; height: 100%;
+body {
+    margin: 0; padding: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+    background: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1920') center/cover;
+    height: 100vh; overflow: hidden;
 }
 
-/* L'effet de verre total sur l'écran */
-.full-glass-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Teinte sombre */
-    backdrop-filter: blur(15px); /* Le flou demandé */
-    z-index: 1;
+.glass-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    backdrop-filter: blur(15px); background: rgba(0,0,0,0.4); z-index: 1;
 }
 
-.main-container {
-    position: relative;
-    z-index: 2; /* Au-dessus du verre */
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
+.app-wrapper {
+    position: relative; z-index: 2; display: flex; height: 100vh;
 }
 
-/* Header Graphique Statistique */
-.ultra-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: var(--glass);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
+/* SIDEBAR STICKERS NOIRS */
+.sidebar-noir {
+    width: 90px; background: rgba(0,0,0,0.6); display: flex; flex-direction: column;
+    align-items: center; padding: 20px 0; border-right: 1px solid var(--glass-border);
 }
 
-.brand h1 {
-    color: var(--gold);
-    font-size: 2.5rem; margin: 0;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+.nav-stickers { margin-top: 30px; }
+.sticker-item {
+    width: 50px; height: 50px; background: #000; color: var(--gold);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px; border: 1px solid #333; cursor: pointer; transition: 0.3s;
+}
+.sticker-item.active, .sticker-item:hover { border-color: var(--gold); box-shadow: 0 0 10px var(--gold); }
+
+/* CONTENT AREA */
+.content-area { flex: 1; display: flex; flex-direction: column; padding: 30px; position: relative; }
+
+/* HEADER & CHART */
+.main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.brand-section h1 { color: var(--gold); font-size: 2.8rem; margin: 0; letter-spacing: 4px; }
+.live-indicator { color: var(--green); font-size: 0.8rem; display: flex; align-items: center; }
+.dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; margin-right: 8px; animation: pulse 1.5s infinite; }
+
+.chart-container { width: 400px; height: 100px; background: rgba(255,255,255,0.05); border-radius: 15px; }
+
+/* CARDS GRID */
+.grid-container {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; overflow-y: auto; padding-bottom: 80px;
 }
 
-.stats-summary {
-    width: 300px; height: 100px; /* Espace pour le graphique */
-}
-
-/* Grille et Cartes Épinglées */
-.ultra-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-    overflow-y: auto;
-}
-
-.pin-card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 20px;
-    border: 1px solid rgba(255,255,255,0.1);
-    height: 180px;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+.glass-card {
+    background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px;
+    padding: 20px; height: 180px; position: relative; color: white;
 }
 
 .pin {
-    position: absolute;
-    top: 10px; right: 10px;
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--gold);
+    position: absolute; top: 15px; right: 15px; width: 8px; height: 8px;
+    background: var(--gold); border-radius: 50%; box-shadow: 0 0 8px var(--gold);
 }
 
-.pin-card h3 {
-    color: var(--gold);
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    margin-top: 0;
+.glass-card h3 { color: var(--gold); font-size: 0.85rem; text-transform: uppercase; margin-top: 0; }
+
+/* STEP ANIMATION (Mouvement Pas à Pas) */
+.step-wrapper { height: 100px; overflow: hidden; position: relative; }
+.step-scroll { animation: stepMove 12s steps(6) infinite; } /* Ajuster steps selon données */
+
+@keyframes stepMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-600px); } /* 6 items * 100px */
 }
 
-/* ANIMATION PAS À PAS (Step Ticker) */
-.step-ticker {
-    height: 100px;
-    overflow: hidden;
-    position: relative;
+.step-box {
+    height: 100px; display: flex; flex-direction: column; justify-content: center;
+    font-size: 0.95rem; border-top: 1px solid rgba(255,255,255,0.05);
 }
 
-.step-content {
-    animation: stepScroll 9s steps(3) infinite; /* 3 étapes pour les 3 items */
+/* FOOTER PROFILE */
+.user-footer { position: absolute; bottom: 30px; right: 30px; }
+.profile-pill {
+    background: #000; border: 1px solid var(--gold); border-radius: 50px;
+    padding: 8px 10px 8px 25px; display: flex; align-items: center; color: white;
+}
+.p-text { margin-right: 15px; text-align: right; }
+.p-sticker {
+    width: 45px; height: 45px; background: var(--gold); border-radius: 50%;
+    color: #000; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
 }
 
-@keyframes stepScroll {
-    0%, 30% { transform: translateY(0); }
-    33%, 63% { transform: translateY(-100px); }
-    66%, 96% { transform: translateY(-200px); }
-}
-
-.step-item {
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--text-black);
-}
-
-/* Footer & Sticker Noir */
-.ultra-footer {
-    margin-top: auto;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.user-profile-sticker {
-    display: flex;
-    align-items: center;
-    background: var(--glass-heavy);
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 1px solid var(--gold);
-}
-
-.user-info {
-    text-align: right;
-    margin-right: 15px;
-    color: #fff;
-}
-
-.user-info .name { display: block; font-weight: bold; }
-.user-info .role { font-size: 0.7rem; color: var(--gold); }
-
-.black-sticker {
-    width: 45px; height: 45px;
-    background: #000;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center; align-items: center;
-    color: var(--gold);
-    border: 2px solid var(--gold);
-}
-
-/* Couleurs spécifiques */
+/* HELPERS */
+.txt-green { color: var(--green); }
+.txt-red { color: var(--red); }
 .txt-gold { color: var(--gold); }
-.txt-green { color: #2ecc71; }
-.txt-red { color: #e74c3c; }
-.txt-yellow { color: #f1c40f; }
-.txt-blue-l { color: #5dade2; }
+.txt-yellow { color: var(--yellow); }
+
+@keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
