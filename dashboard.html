@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarite - Dashboard</title>
+    <link rel="stylesheet" href="dashboard-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+
+    <header class="main-header">
+        <div class="school-identity">
+            <div class="logo-upload">
+                <label for="logo-input">
+                    <img id="school-logo" src="https://via.placeholder.com/50" alt="Logo">
+                </label>
+                <input type="file" id="logo-input" hidden accept="image/*">
+            </div>
+            <input type="text" class="school-name-input" placeholder="Nom de l'école...">
+        </div>
+    </header>
+
+    <nav class="sidebar-glass">
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links">
+            <li class="active"><div class="icon-frame"><i class="fas fa-chart-line"></i></div><span>Dashboard</span></li>
+            <li><div class="icon-frame"><i class="fas fa-user-graduate"></i></div><span>Casier élève</span></li>
+            <li><div class="icon-frame"><i class="fas fa-users-cog"></i></div><span>Gestion du personnel</span></li>
+            <li><div class="icon-frame"><i class="fas fa-sitemap"></i></div><span>Organisation académique</span></li>
+            <li><div class="icon-frame"><i class="fas fa-book"></i></div><span>Cours & Matières</span></li>
+            <li><div class="icon-frame"><i class="fas fa-chalkboard-teacher"></i></div><span>Enseignant</span></li>
+            <li><div class="icon-frame"><i class="fas fa-file-invoice"></i></div><span>Notes & Évaluations</span></li>
+            <li><div class="icon-frame"><i class="fas fa-user-check"></i></div><span>Présences & Discipline</span></li>
+            <li><div class="icon-frame"><i class="fas fa-wallet"></i></div><span>Finances</span></li>
+            <li><div class="icon-frame"><i class="fas fa-hands-helping"></i></div><span>Parents / Tuteurs</span></li>
+            <li><div class="icon-frame"><i class="fas fa-cog"></i></div><span>Settings</span></li>
+            <li><div class="icon-frame"><i class="fas fa-shield-alt"></i></div><span>Sécurité & Accès</span></li>
+        </ul>
+    </nav>
+
+    <main class="dashboard-grid">
+        
+        <div class="card-3d">
+            <h3>Casier Élève</h3>
+            <div class="ticker-container">
+                <div class="ticker-item">Présents : <span class="txt-green">245</span></div>
+                <div class="ticker-item">Absents : <span class="txt-red">12</span></div>
+            </div>
+        </div>
+
+        <div class="card-3d">
+            <h3>Gestion du Personnel</h3>
+            <div class="ticker-container slow">
+                <div class="ticker-item">Profs: <span class="txt-green">P:18</span> / <span class="txt-red">A:2</span></div>
+                <div class="ticker-item">Admin: <span class="txt-green">P:5</span> / <span class="txt-red">A:0</span></div>
+                <div class="ticker-item">Staff: <span class="txt-green">P:10</span> / <span class="txt-red">A:1</span></div>
+            </div>
+        </div>
+
+        <div class="card-3d">
+            <h3>Organisation Académique</h3>
+            <p class="static-subtitle">Titulaire : Mr. Kambale</p>
+            <div class="ticker-container">
+                <div class="ticker-item">6ème A : 15 G / 12 F</div>
+                <div class="ticker-item">5ème B : 10 G / 18 F</div>
+            </div>
+        </div>
+
+        <div class="card-3d">
+            <h3>Cours en Direct</h3>
+            <div class="ticker-container">
+                <div class="ticker-item">6ème A : Mathématiques</div>
+                <div class="ticker-item">3ème Élec : Électronique</div>
+            </div>
+        </div>
+
+        <div class="card-3d">
+            <h3>Statut Enseignants</h3>
+            <div class="ticker-container">
+                <div class="ticker-item">M. Jean : <span class="status-dot green"></span> Actif</div>
+                <div class="ticker-item">Mme. Marie : <span class="status-dot red"></span> Inactif</div>
+            </div>
+        </div>
+
+        <div class="card-3d collapsible" onclick="this.classList.toggle('open')">
+            <h3>Notes & Évaluations (Cliquez)</h3>
+            <div class="table-content">
+                <table>
+                    <thead>
+                        <tr><th>Classe</th><th>Titulaire</th><th>Moyenne</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1ère P</td><td>M. Paul</td><td>14.5</td></tr>
+                        <tr><td>2ème P</td><td>Mme Alice</td><td>13.2</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="dashboard-app.js"></script>
+</body>
+</html>
+
