@@ -3,148 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCHOLARITE - Ultra Glass Dashboard</title>
+    <title>Scholarite - Ultra Glass Edition</title>
     <link rel="stylesheet" href="dashboard-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="master-bg"></div>
-    <div class="glass-screen"></div>
+    <div class="glass-master-overlay"></div>
 
-    <nav class="cyber-sidebar">
-        <div class="school-identity">
-            <label for="logo-upload" class="logo-wrapper">
-                <img id="display-logo" src="https://via.placeholder.com/60" alt="Logo">
-                <div class="plus-overlay"><i class="fas fa-plus"></i></div>
-            </label>
-            <input type="file" id="logo-upload" hidden>
+    <nav class="sidebar-cyber">
+        <div class="logo-zone">
+            <div class="logo-circle" id="logo-trigger">
+                <img id="school-logo" src="" alt="">
+                <i class="fas fa-school"></i>
+            </div>
+            <input type="file" id="logo-input" hidden>
         </div>
-        <div class="nav-stickers">
-            <div class="sticker active"><i class="fas fa-th-large"></i></div>
-            <div class="sticker"><i class="fas fa-user-graduate"></i></div>
-            <div class="sticker"><i class="fas fa-users-cog"></i></div>
-            <div class="sticker"><i class="fas fa-university"></i></div>
-            <div class="sticker"><i class="fas fa-broadcast-tower"></i></div>
-            <div class="sticker"><i class="fas fa-chalkboard-teacher"></i></div>
-            <div class="sticker"><i class="fas fa-file-invoice"></i></div>
-            <div class="sticker"><i class="fas fa-wallet"></i></div>
-            <div class="sticker"><i class="fas fa-user-tie"></i></div>
-            <div class="sticker"><i class="fas fa-user-circle"></i></div>
-            <div class="sticker"><i class="fas fa-cog"></i></div>
-        </div>
+        <ul class="nav-stickers">
+            <li class="active"><i class="fas fa-th-large"></i></li>
+            <li><i class="fas fa-user-graduate"></i></li>
+            <li><i class="fas fa-users-cog"></i></li>
+            <li><i class="fas fa-university"></i></li>
+            <li><i class="fas fa-book-open"></i></li>
+            <li><i class="fas fa-chalkboard-teacher"></i></li>
+            <li><i class="fas fa-file-invoice"></i></li>
+            <li><i class="fas fa-wallet"></i></li>
+            <li><i class="fas fa-user-tie"></i></li>
+            <li><i class="fas fa-user-circle"></i></li>
+            <li><i class="fas fa-cog"></i></li>
+        </ul>
     </nav>
 
-    <main class="content-area">
-        <header class="trading-header">
-            <div class="brand-box">
-                <h1 class="glow-text">SCHOLARITE</h1>
-                <span class="status-badge">SYSTÈME LIVE</span>
-            </div>
-            <div class="chart-container">
-                <canvas id="tradingChart"></canvas>
+    <main class="main-screen">
+        <header class="top-bar">
+            <h1 class="main-title">SCHOLARITE</h1>
+            <div class="global-stats-card">
+                <canvas id="mainChart"></canvas>
             </div>
         </header>
 
-        <div class="dashboard-grid">
-            
+        <div class="grid-container">
             <div class="glass-card">
                 <div class="pin"></div>
-                <div class="card-header"><h3>CASIER ÉLÈVE</h3></div>
-                <div class="data-row">
-                    <div class="stat"><small>TOTAL</small><span class="txt-yellow">450</span></div>
-                    <div class="stat"><small>PRÉSENTS</small><span class="txt-green">412</span></div>
-                    <div class="stat"><small>ABSENTS</small><span class="txt-red">38</span></div>
-                </div>
+                <h3><i class="fas fa-user-graduate"></i> Casier Élève</h3>
+                <div class="data-row">Total: <span class="txt-yellow">450</span></div>
+                <div class="data-row">Présents: <span class="txt-green">412</span></div>
+                <div class="data-row">Absents: <span class="txt-red">38</span></div>
             </div>
 
-            <div class="glass-card">
+            <div class="glass-card scroll">
                 <div class="pin"></div>
-                <div class="card-header"><h3>GESTION PERSONNEL</h3></div>
-                <div class="step-window">
-                    <div class="step-engine" id="engine-personnel"></div>
-                </div>
+                <h3><i class="fas fa-users-cog"></i> Personnel</h3>
+                <div class="loop-box" id="loop-personnel"></div>
             </div>
 
-            <div class="glass-card large">
+            <div class="glass-card scroll">
                 <div class="pin"></div>
-                <div class="card-header"><h3>ACADÉMIQUE (RDC)</h3></div>
-                <div class="table-header">
-                    <span>CLASSE</span><span>F/G</span><span>TOTAL</span>
-                </div>
-                <div class="step-window">
-                    <div class="step-engine" id="engine-academy"></div>
-                </div>
+                <h3><i class="fas fa-university"></i> Académie</h3>
+                <div class="loop-box" id="loop-academie"></div>
             </div>
 
-            <div class="glass-card">
+            <div class="glass-card scroll">
                 <div class="pin"></div>
-                <div class="card-header"><h3>LIVE COURS</h3></div>
-                <div class="step-window">
-                    <div class="step-engine" id="engine-live"></div>
-                </div>
+                <h3><i class="fas fa-book"></i> Matières</h3>
+                <div class="loop-box" id="loop-matieres"></div>
             </div>
 
-            <div class="glass-card">
+            <div class="glass-card scroll">
                 <div class="pin"></div>
-                <div class="card-header"><h3>ENSEIGNANTS</h3></div>
-                <div class="step-window">
-                    <div class="step-engine" id="engine-teachers"></div>
-                </div>
+                <h3><i class="fas fa-chalkboard-teacher"></i> Enseignants</h3>
+                <div class="loop-box" id="loop-profs"></div>
+            </div>
+
+            <div class="glass-card scroll">
+                <div class="pin"></div>
+                <h3><i class="fas fa-star"></i> Notes %</h3>
+                <div class="loop-box" id="loop-notes"></div>
             </div>
 
             <div class="glass-card">
                 <div class="pin"></div>
-                <div class="card-header"><h3>NOTES (%)</h3></div>
-                <div class="step-window">
-                    <div class="step-engine" id="engine-notes"></div>
-                </div>
+                <h3><i class="fas fa-clock"></i> Emploi du Temps</h3>
+                <div class="data-row">Cours prévus: <span class="txt-gold">12</span></div>
+                <div class="data-row">Exécutés: <span class="txt-green">08</span></div>
+                <div class="data-row">Restants: <span class="txt-red">04</span></div>
             </div>
 
-            <div class="glass-card">
+            <div class="glass-card scroll">
                 <div class="pin"></div>
-                <div class="card-header"><h3>EMPLOI DU TEMPS</h3></div>
-                <div class="data-static">
-                    <p>COURS PRÉVUS: <strong>08</strong></p>
-                    <p>EXÉCUTÉS: <span class="txt-green">06</span></p>
-                </div>
+                <h3><i class="fas fa-money-bill-wave"></i> Finances</h3>
+                <div class="loop-box" id="loop-finances"></div>
             </div>
 
-            <div class="glass-card">
+            <div class="glass-card scroll">
                 <div class="pin"></div>
-                <div class="card-header"><h3>FINANCES / CLASSE</h3></div>
-                <div class="step-window">
-                    <div class="step-engine" id="engine-finance"></div>
-                </div>
+                <h3><i class="fas fa-user-tie"></i> Staff</h3>
+                <div class="loop-box" id="loop-staff"></div>
             </div>
 
-            <div class="glass-card">
+            <div class="glass-card profile">
                 <div class="pin"></div>
-                <div class="card-header"><h3>STAFF FONCTIONS</h3></div>
-                <div class="step-window">
-                    <div class="step-engine" id="engine-staff-list"></div>
-                </div>
-            </div>
-
-            <div class="glass-card"><div class="pin"></div><h3>RAPPORTS</h3><p class="txt-green">STABLE</p></div>
-            <div class="glass-card"><div class="pin"></div><h3>ALERTES</h3><p>AUCUNE</p></div>
-
-            <div class="glass-card profil">
-                <div class="pin"></div>
-                <div class="profil-content">
-                    <div class="text">
-                        <small>NOM COMPLET</small>
-                        <h4 id="user-name">Jean Dupont</h4>
+                <div class="profile-content">
+                    <div>
+                        <small>Utilisateur</small>
+                        <h4 id="user-name">Kambale Jean</h4>
                     </div>
-                    <div class="black-circle-sticker">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
+                    <div class="black-sticker-circle"><i class="fas fa-user"></i></div>
                 </div>
             </div>
-
         </div>
     </main>
+
     <script src="dashboard-app.js"></script>
 </body>
 </html>
-
